@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	</head>
+	<body>
+	
+		<table cellpadding="0" cellspacing="0" border="0" id="backgroundTable">
+		    <tr>
+		        <td style="padding:5px; text-align:right; font-size:12px">
+		            <small></small>
+		        </td>
+		    </tr>
+		    <tr>
+		        <td valign="top" style="<?php echo $style; ?>; padding:0px;">
+		            <img src="<?php echo $this->serverUrl(); ?>/images/logo_mail.png"  />
+		        </td>
+		    </tr>
+		    <tr>
+		        <td style="padding:10px">
+		            <?php echo $this->content; ?>
+		        </td>
+		    </tr>
+		</table>
+	
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<?php if ($this->flashMessenger('success')) : ?>
+    <div data-alert class="alert-box success round">
+        <?php echo $this->flashMessenger()
+                        ->setMessageCloseString("")
+                        ->setMessageSeparatorString("")
+                        ->setMessageOpenFormat("")
+                        ->render('success'); ?>
+    </div>
+<?php endif; ?>
+
+<?php if ($this->flashMessenger('error')) : ?>
+    <div data-alert class="alert-box alert round">
+        <?php echo $this->flashMessenger()
+                        ->setMessageCloseString("")
+                        ->setMessageSeparatorString("")
+                        ->setMessageOpenFormat("")
+                        ->render('error'); ?>
+    </div>
+<?php endif; ?>
+
+<?php if (isset($this->form)) : ?>
+    <?php if (is_array($this->form)) : ?>
+        <?php foreach($this->form as $form) : ?>
+            <?php if ($form->hasValidated() && !$form->isValid()) : ?>
+                <div data-alert class="alert-box alert round">
+                    <?php echo $this->formErrorMessage($form->getMessages()); ?>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <?php if ($this->form->hasValidated() && !$this->form->isValid()) : ?>
+            <div data-alert class="alert-box alert round">
+                <?php echo $this->formErrorMessage($this->form->getMessages()); ?>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php endif; ?>
