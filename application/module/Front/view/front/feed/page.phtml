@@ -1,6 +1,33 @@
-<?php foreach($this->fbPhotoFeed->getPhotoFeed() as $photo): ?>
-<div>
-    <p><?php if(isset($photo['name'])) echo $photo['name']; ?></p>
-    <img src="<?php echo $photo['images'][0]['source']; ?>"></img>
+<p style="text-align: center;"><a class="button large default" href="#" id="fb-login">Print</a></p>
+
+<div id="newspaper" class="clearfix">
+
+    <div class="header">
+        <img src="/images/nieuwsbrief_header.png" />
+        <p class="family">Familie Peters Antwerpen 22/27</p>
+    </div>
+    
+    
+<?php $feed = $this->fbPhotoFeed->getPhotoFeed(); 
+      $i = 0; 
+      $y = 1;
+      while($i < 4 && list($key, $photo) = each($feed)): 
+          if($i%2 == 0) {
+              echo '<div class="col col'.$y.'">';
+              $y++;
+          }
+?>
+    
+    <div class="item">
+        <img src="<?php echo $photo['images'][0]['source']; ?>"></img>
+        <p class="when">Xavier Vermeiren Zondag 1/12/2013</p>
+        <p class="title"><?php if(isset($photo['name'])) echo $photo['name']; ?></p>
+    </div>
+    
+<?php $i++; if($i%2 == 0) echo '</div>'; 
+      endwhile; 
+?>
+
 </div>
-<?php endforeach; ?>
+
+<p style="text-align: center;"><a class="button large default" href="#" id="fb-login">Print</a></p>

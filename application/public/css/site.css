@@ -773,3 +773,17 @@ body #sidebar .tab-hold .tabs li.active a{border-top-color:#50cbf4!important;}
 .bbp_reply_admin_links .admin_links_sep, .bbp-admin-links .admin_links_sep{
     display: none;
 }
+
+
+/*custom*/
+#newspaper {
+    background-color: #ffffff;
+    padding: 5%;
+    margin: 0 0 1em 0;
+}
+#newspaper .header { margin: 0 0 5% 0; }
+#newspaper .header .family { text-align: center; color: #50CBF4; text-transform: capitalize; }
+#newspaper .col { float: left; width: 47%; }
+#newspaper .col1 { margin-right: 5%; }
+#newspaper .item { color: #333333; font-size: 0.78em; }
+#newspaper .item .when { color:#50CBF4; font-size: 0.8em; margin: 0 0 0.1em 0; font-style: italic; }

@@ -34,6 +34,10 @@ class FeedController extends AbstractActionController {
             $fbPhotoFeed->addFeed($facebookWrapper->getUserUploadedPhotos(10));
             $fbPhotoFeed->addFeed($facebookWrapper->getUserPhotos(10));
         }
+        else
+        {
+            header('Location: /');
+        }
         return array(
             'config'      => $config,
             'fbPhotoFeed' => $fbPhotoFeed
