@@ -40,8 +40,7 @@ class UserController extends AbstractActionController {
         ));
         $response   = json_decode($response);
 
-        $newspaper = new Newspaper();
-        $newspaper->setEmail($response->email);
+        $newspaper  = new Newspaper();
 
         $form = new SignupForm($this->EmPlugin()->getEntityManager(), $request->getRequestUri());
         $form->bind($newspaper);
@@ -61,8 +60,12 @@ class UserController extends AbstractActionController {
                 $connector->setNewspaper($newspaper)
                           ->setType(Connector::FEED_TYPE_FACEBOOK)
                           ->setActive(true)
-                          ->setUniqueId($response->id);
-                
+                          ->setUniqueId($response->id)
+                          ->setEmail($response->email)
+                          ->setFirstname($response->first_name)
+                          ->setLastname($response->last_name)
+                          ->setAccessToken($oauth->accessToken);
+
                 $this->EmPlugin()->getEntityManager()->persist($connector);
                 $this->EmPlugin()->getEntityManager()->flush();
 
@@ -147,14 +150,14 @@ class UserController extends AbstractActionController {
             $oauth->Initialize();
 
             $oauth->accessToken = $oauth->getAccessToken();
-
-        $response   = $oauth->curl_request("https://graph.connect.facebook.com/me/?", "GET", array(
-            'client_id'     => $oauth->client_id,
-            'client_secret' => $oauth->client_secret,
-            'oauth_token'   => $oauth->accessToken,
-        ));
-        $response   = json_decode($response);
-        var_dump($response);die;
+var_dump($oauth->getAccessToken());die;
+            $response   = $oauth->curl_request("https://graph.connect.facebook.com/me/?", "GET", array(
+                'client_id'     => $oauth->client_id,
+                'client_secret' => $oauth->client_secret,
+                'oauth_token'   => $oauth->accessToken,
+            ));
+            $response   = json_decode($response);
+            var_dump($response);die;
 
         $requestIds = $this->params()->fromRoute('requestIds');
         $requestIds = explode(",", $requestIds);

@@ -31,6 +31,19 @@ var FBcustom = (function(window, document, $, undefined)
                 }
             }, {scope: settings.app_scope});
         });
+        
+        $('#fb-invite').bind('click', function() {
+            FB.ui({
+                method  : 'apprequests',
+                message : 'Nodig je familie uit...'
+            }, function(response) {
+                if (response.to) {
+                    window.location = "/invite/newspaperId/" + settings.newspaper_id + "?" + $.param(response);
+                } else {
+                    console.log('User cancelled login or did not fully authorize.');
+                }
+            })
+        });
     };
     
     return {

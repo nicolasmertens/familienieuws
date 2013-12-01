@@ -1205,58 +1205,6 @@
         "homepage": "http://symfony.com"
     },
     {
-        "name": "jdorn/sql-formatter",
-        "version": "v1.2.9",
-        "version_normalized": "1.2.9.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/jdorn/sql-formatter.git",
-            "reference": "bd1f09133f6dbbe0713856910e58ea9480c2be58"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/jdorn/sql-formatter/zipball/bd1f09133f6dbbe0713856910e58ea9480c2be58",
-            "reference": "bd1f09133f6dbbe0713856910e58ea9480c2be58",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.4"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*"
-        },
-        "time": "2013-04-26 18:42:52",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.3.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jeremy Dorn",
-                "email": "jeremy@jeremydorn.com",
-                "homepage": "http://jeremydorn.com/"
-            }
-        ],
-        "description": "a PHP SQL highlighting library",
-        "homepage": "https://github.com/jdorn/sql-formatter/",
-        "keywords": [
-            "highlight",
-            "sql"
-        ]
-    },
-    {
         "name": "doctrine/dbal",
         "version": "v2.4.1",
         "version_normalized": "2.4.1.0",
@@ -2082,58 +2030,211 @@
         }
     },
     {
-        "name": "zendframework/zendservice-twitter",
-        "version": "2.1.0",
-        "version_normalized": "2.1.0.0",
+        "name": "jdorn/sql-formatter",
+        "version": "v1.2.16",
+        "version_normalized": "1.2.16.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/zendframework/ZendService_Twitter.git",
-            "reference": "b3be44fa3f2285e4ee9811ce5c518e3eab020732"
+            "url": "https://github.com/jdorn/sql-formatter.git",
+            "reference": "8859d664737492d313c34796731b35eca851b362"
         },
         "dist": {
             "type": "zip",
-            "url": "https://packages.zendframework.com/composer/zendframework-zendservice-twitter-b3be44fa3f2285e4ee9811ce5c518e3eab020732-zip-4f4b9f.zip",
-            "reference": "2.1.0",
-            "shasum": "715ddc4f00fe6880ba858547f7ca0d2bf3b3b3ba"
+            "url": "https://api.github.com/repos/jdorn/sql-formatter/zipball/8859d664737492d313c34796731b35eca851b362",
+            "reference": "8859d664737492d313c34796731b35eca851b362",
+            "shasum": ""
         },
         "require": {
-            "php": ">=5.3.3",
-            "zendframework/zend-feed": ">=2.0.0",
-            "zendframework/zend-http": ">=2.0.0",
-            "zendframework/zend-json": ">=2.0.0",
-            "zendframework/zend-stdlib": ">=2.0.0",
-            "zendframework/zend-uri": ">=2.0.0",
-            "zendframework/zendoauth": ">=2.0.0"
+            "php": ">=5.2.4"
         },
         "require-dev": {
-            "zendframework/zend-config": ">=2.0.0"
+            "phpunit/phpunit": "3.7.*"
         },
-        "time": "2013-03-13 20:49:31",
+        "time": "2013-11-27 22:51:13",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.0.x-dev",
-                "dev-develop": "2.1.x-dev"
+                "dev-master": "1.3.x-dev"
             }
         },
         "installation-source": "dist",
         "autoload": {
+            "classmap": [
+                "lib"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jeremy Dorn",
+                "email": "jeremy@jeremydorn.com",
+                "homepage": "http://jeremydorn.com/"
+            }
+        ],
+        "description": "a PHP SQL highlighting library",
+        "homepage": "https://github.com/jdorn/sql-formatter/",
+        "keywords": [
+            "highlight",
+            "sql"
+        ]
+    },
+    {
+        "name": "ensepar/tcpdf",
+        "version": "5.0.003",
+        "version_normalized": "5.0.003.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/OwlyCode/tcpdf.git",
+            "reference": "ae578409e9454fdf6c794cce6f063b0c95bfa518"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/OwlyCode/tcpdf/zipball/ae578409e9454fdf6c794cce6f063b0c95bfa518",
+            "reference": "ae578409e9454fdf6c794cce6f063b0c95bfa518",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2013-09-12 17:00:40",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "fonts",
+                "config/lang",
+                "config",
+                "2dbarcodes.php",
+                "barcodes.php",
+                "htmlcolors.php",
+                "qrcode.php",
+                "tcpdf.php",
+                "unicode_data.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "LGPLv3"
+        ],
+        "authors": [
+            {
+                "name": "Nicola Asuni",
+                "email": "info@tecnick.com",
+                "homepage": "http://nicolaasuni.tecnick.com"
+            },
+            {
+                "name": "Tristan Maindron",
+                "email": "tmaindron@gmail.com",
+                "homepage": "http://www.github.com/OwlyCode"
+            }
+        ],
+        "description": "TCPDF is a PHP class for generating PDF documents.",
+        "homepage": "http://www.tcpdf.org/",
+        "keywords": [
+            "TCPDF",
+            "pdf"
+        ]
+    },
+    {
+        "name": "ensepar/html2pdf",
+        "version": "1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/OwlyCode/html2pdf.git",
+            "reference": "b53a27430cc35b29bbe2faaa55ed4a7d5c156cd3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/OwlyCode/html2pdf/zipball/b53a27430cc35b29bbe2faaa55ed4a7d5c156cd3",
+            "reference": "b53a27430cc35b29bbe2faaa55ed4a7d5c156cd3",
+            "shasum": ""
+        },
+        "require": {
+            "ensepar/tcpdf": "5.0.003",
+            "php": ">=5.2"
+        },
+        "time": "2013-09-13 12:23:43",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
             "psr-0": {
-                "ZendService\\Twitter\\": "library/"
+                "HTML2PDF": "."
             }
         },
+        "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "BSD-3-Clause"
+            "LGPL"
         ],
-        "description": "OOP wrapper for the Twitter web service",
-        "homepage": "http://packages.zendframework.com/",
+        "authors": [
+            {
+                "name": "Spipu",
+                "homepage": "http://sourceforge.net/users/spipu",
+                "role": "Developer"
+            },
+            {
+                "name": "OwlyCode",
+                "homepage": "http://www.github.com/OwlyCode",
+                "role": "Developer"
+            }
+        ],
+        "description": "Unofficial fork of 'html2pdf' with Composer support. (Fixed composer dependency problem)",
+        "homepage": "https://github.com/jwronsky/html2pdf",
         "keywords": [
-            "twitter",
-            "zf2"
+            "html",
+            "html2pdf",
+            "pdf"
+        ]
+    },
+    {
+        "name": "ensepar/html2pdf-bundle",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "target-dir": "Ensepar/Html2pdfBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/OwlyCode/EnseparHtml2pdfBundle.git",
+            "reference": "7ad5eb6a46145c851404b14dfc372ca29c6c5afe"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/OwlyCode/EnseparHtml2pdfBundle/zipball/7ad5eb6a46145c851404b14dfc372ca29c6c5afe",
+            "reference": "7ad5eb6a46145c851404b14dfc372ca29c6c5afe",
+            "shasum": ""
+        },
+        "require": {
+            "ensepar/html2pdf": "1.0.1",
+            "php": ">=5.3.2",
+            "symfony/framework-bundle": ">=2.0"
+        },
+        "time": "2013-11-21 11:24:42",
+        "type": "symfony-bundle",
+        "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "Ensepar\\Html2pdfBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
         ],
-        "support": {
-            "source": "https://github.com/zendframework/ZendService_Twitter/tree/release-2.1.0",
-            "issues": "https://github.com/zendframework/ZendService_Twitter/issues"
-        }
+        "authors": [
+            {
+                "name": "Tristan Maindron",
+                "email": "tmaindron@gmail.com",
+                "homepage": "http://www.github.com/OwlyCode"
+            }
+        ],
+        "description": "Use HTML2PDF as a Symfony2 Service",
+        "homepage": "https://github.com/OwlyCode/EnseparHtml2pdfBundle",
+        "keywords": [
+            "TCPDF",
+            "html2pdf",
+            "pdf"
+        ]
     }
 ]

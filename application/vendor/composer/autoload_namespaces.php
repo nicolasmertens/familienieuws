@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Zend\\' => array($vendorDir . '/zendframework/zendframework/library'),
-    'ZendService\\Twitter\\' => array($vendorDir . '/zendframework/zendservice-twitter/library'),
     'ZendRest' => array($vendorDir . '/zendframework/zendrest/library'),
     'ZendOpenId' => array($vendorDir . '/zendframework/zendopenid/library'),
     'ZendOAuth' => array($vendorDir . '/zendframework/zendoauth/library'),
@@ -26,6 +25,8 @@ return array(
     'Symfony\\Bundle\\FrameworkBundle\\' => array($vendorDir . '/symfony/framework-bundle'),
     'Symfony\\Bridge\\Doctrine\\' => array($vendorDir . '/symfony/doctrine-bridge'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'HTML2PDF' => array($vendorDir . '/ensepar/html2pdf'),
+    'Ensepar\\Html2pdfBundle' => array($vendorDir . '/ensepar/html2pdf-bundle'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib'),
@@ -41,4 +42,5 @@ return array(
     'DoctrineORMModuleTest\\' => array($vendorDir . '/doctrine/doctrine-orm-module/tests'),
     'DoctrineModule\\' => array($vendorDir . '/doctrine/doctrine-module/src'),
     'DoctrineModuleTest\\' => array($vendorDir . '/doctrine/doctrine-module/tests'),
+    '' => array($baseDir . '/src'),
 );

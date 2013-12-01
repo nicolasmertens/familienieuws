@@ -21,6 +21,10 @@
         "doctrine/doctrine-module": "0.*",
 	"doctrine/doctrine-fixtures-bundle": "dev-master",
         "zendframework/zendrest": "2.*",
-        "zendframework/zendoauth": "2.*"
+        "zendframework/zendoauth": "2.*",
+        "ensepar/html2pdf-bundle": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "": "src/" }
     }
 }

@@ -39,4 +39,12 @@ class FeedController extends AbstractActionController {
             'fbPhotoFeed' => $fbPhotoFeed
         );
     }
+
+    public function createPdfAction()
+    {
+        $html2pdf = new \HTML2PDF('P', 'A4', 'nl');
+        $html2pdf->pdf->SetDisplayMode('fullpage');
+        $html2pdf->writeHTML("<h1>test</h1>", false);
+        $html2pdf->Output('test.pdf', false);
+    }
 }
