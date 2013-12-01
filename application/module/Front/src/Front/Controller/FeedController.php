@@ -44,8 +44,19 @@ class FeedController extends AbstractActionController {
         );
     }
 
-    public function createPdfAction()
+    public function pdfAction()
     {
+        $view = new \Zend\View\Model\ViewModel(array(
+            'config'      => $config,
+            'fbPhotoFeed' => $fbPhotoFeed
+        ));
+        $view->setTemplate('front/feed/pdf.phtml');
+
+        $viewRender = $this->getServiceLocator()->get('ViewRenderer');
+        $html = $viewRender->render($view);
+
+        echo $html;die;
+
         $html2pdf = new \HTML2PDF('P', 'A4', 'nl');
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML("<h1>test</h1>", false);
