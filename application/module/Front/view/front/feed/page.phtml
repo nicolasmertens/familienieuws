@@ -1,1 +1,6 @@
-test
+<?php foreach($this->fbPhotoFeed->getPhotoFeed() as $photo): ?>
+<div>
+    <p><?php if(isset($photo['name'])) echo $photo['name']; ?></p>
+    <img src="<?php echo $photo['images'][0]['source']; ?>"></img>
+</div>
+<?php endforeach; ?>

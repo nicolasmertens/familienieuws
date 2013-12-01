@@ -114,7 +114,7 @@ class SignupForm extends Form {
                 'attributes' => array(
                     'type'        => 'submit',
                     'value'       => 'registreer',
-                    'class'       => 'button prefix',
+                    'class'       => 'button large default',
                 ),
             )
         );

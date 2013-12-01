@@ -16,10 +16,27 @@ class FeedController extends AbstractActionController {
         $config    = $this->getServiceLocator()->get('config');
         $config    = $config['connectors']['facebook'];
 
-        print_r($config);
+        require_once './../application/lib/facebookwrapper.php';
+        require_once './../application/lib/fbphotofeed.php';
 
+        $facebookWrapper = new \FacebookWrapper(array(
+            'appId' => $config['app_id'],
+            'secret' => $config['app_secret'],
+            'cookie' => true,
+            'fileUpload' => false, // optional
+            'allowSignedRequest' => false // optional, but should be set to false for non-canvas apps
+        ));
+        $user = $facebookWrapper->getUserData();
+
+        if($user)
+        {
+            $fbPhotoFeed = new \FbPhotoFeed();
+            $fbPhotoFeed->addFeed($facebookWrapper->getUserUploadedPhotos(10));
+            $fbPhotoFeed->addFeed($facebookWrapper->getUserPhotos(10));
+        }
         return array(
-            'config' => $config
+            'config'      => $config,
+            'fbPhotoFeed' => $fbPhotoFeed
         );
     }
 }

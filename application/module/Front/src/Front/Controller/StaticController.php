@@ -20,11 +20,13 @@ class StaticController extends AbstractActionController {
 
         if ($requestIds) {
             return $this->redirect()->toUrl("https://www.facebook.com/dialog/oauth?client_id=" . $config['facebook']['app_id'] . "&scope=email,publish_stream,status_update,friends_online_presence,user_birthday,user_location,user_work_history&redirect_uri=http://www.familienieuws.eu/confirm");
-        }
+        } else {
+            $this->layout('layout/front');
 
-        return array(
-            'config' => $config,
-        );
+            return array(
+                'config' => $config,
+            );
+        }
     }
     
     public function pricingAction()

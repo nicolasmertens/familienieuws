@@ -37,6 +37,7 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map'             => array(
+            'layout/front'  => __DIR__ . '/../view/layout/home.phtml',
             'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
             'layout/mail'   => __DIR__ . '/../view/layout/mail.phtml',
             'error/404'     => __DIR__ . '/../view/error/404.phtml',
