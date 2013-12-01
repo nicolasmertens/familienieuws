@@ -18,29 +18,26 @@ class UserController extends AbstractActionController {
 
     public function signupAction()
     {
-        $config  = $this->getServiceLocator()->get('config');
-        $config  = $config['connectors']['facebook'];
+        $config    = $this->getServiceLocator()->get('config');
+        $config    = $config['connectors']['facebook'];
 
-        $request = $this->getRequest();
+        $request   = $this->getRequest();
 
-        $oauth   = new \Common\Service\Connector\SocialApi();
+        require_once './../application/lib/facebookwrapper.php';
+        require_once './../application/lib/fbphotofeed.php';
 
-        $oauth->provider      = "Facebook";
-        $oauth->client_id     = $config['app_id'];
-        $oauth->client_secret = $config['app_secret'];
-        $oauth->scope         = $config['scope'];
-        $oauth->redirect_uri  = $config['callback_url'];
-        $oauth->Initialize();
-        $oauth->accessToken = $this->params()->fromQuery('access_token', false);
-
-        $response   = $oauth->curl_request("https://graph.connect.facebook.com/me/?", "GET", array(
-            'client_id'     => $oauth->client_id,
-            'client_secret' => $oauth->client_secret,
-            'oauth_token'   => $oauth->accessToken,
+        $facebookWrapper = new \FacebookWrapper(array(
+            'appId'      => $config['app_id'],
+            'secret'     => $config['app_secret'],
+            'cookie'     => true,
+            'fileUpload' => false, // optional
+            'allowSignedRequest' => false // optional, but should be set to false for non-canvas apps
         ));
-        $response   = json_decode($response);
+
+        $user        = $facebookWrapper->getUserData();
 
         $newspaper  = new Newspaper();
+        $newspaper->setEmail($user['email']);
 
         $form = new SignupForm($this->EmPlugin()->getEntityManager(), $request->getRequestUri());
         $form->bind($newspaper);
@@ -54,17 +51,17 @@ class UserController extends AbstractActionController {
                 // save newspaper
                 $this->EmPlugin()->getEntityManager()->persist($newspaper);
                 $this->EmPlugin()->getEntityManager()->flush();
-                
+
                 // save connector
                 $connector = new Connector();
                 $connector->setNewspaper($newspaper)
                           ->setType(Connector::FEED_TYPE_FACEBOOK)
                           ->setActive(true)
-                          ->setUniqueId($response->id)
-                          ->setEmail($response->email)
-                          ->setFirstname($response->first_name)
-                          ->setLastname($response->last_name)
-                          ->setAccessToken($oauth->accessToken);
+                          ->setUniqueId($user['id'])
+                          ->setEmail($user['email'])
+                          ->setFirstname($user['first_name'])
+                          ->setLastname($user['last_name'])
+                          ->setAccessToken($this->params()->fromQuery('access_token'));
 
                 $this->EmPlugin()->getEntityManager()->persist($connector);
                 $this->EmPlugin()->getEntityManager()->flush();
@@ -136,68 +133,47 @@ class UserController extends AbstractActionController {
     
     public function confirmAction()
     {
-        $config  = $this->getServiceLocator()->get('config');
-        $config  = $config['connectors']['facebook'];
+        $config    = $this->getServiceLocator()->get('config');
+        $config    = $config['connectors']['facebook'];
 
-            $oauth   = new \Common\Service\Connector\SocialApi();
+        require_once './../application/lib/facebookwrapper.php';
+        require_once './../application/lib/fbphotofeed.php';
 
-            $oauth->provider      = "Facebook";
-            $oauth->client_id     = $config['app_id'];
-            $oauth->client_secret = $config['app_secret'];
-            $oauth->scope         = "email,publish_stream,status_update,friends_online_presence,user_birthday,user_location,user_work_history";
-            $oauth->redirect_uri  = "http://www.familienieuws.eu/confirm";
-            $oauth->code          = $this->params()->fromQuery('code');
-            $oauth->Initialize();
+        $facebookWrapper = new \FacebookWrapper(array(
+            'appId'      => $config['app_id'],
+            'secret'     => $config['app_secret'],
+            'cookie'     => true,
+            'fileUpload' => false, // optional
+            'allowSignedRequest' => false // optional, but should be set to false for non-canvas apps
+        ));
+        if ($this->params()->fromQuery('state')) {
+            var_dump($facebookWrapper->getAccessToken());
+            var_dump($facebookWrapper->getUserData());
+            var_dump('test');die;
+        }
+        if (!$this->params()->fromQuery('access_token')) {
+            $url = $facebookWrapper->getLoginStatusUrl(array('response_type' => 'token'));
+            header('Location: ' . $url);
+            exit;
+        }
+        $user        = $facebookWrapper->getUserData();
 
-            $oauth->accessToken = $oauth->getAccessToken();
-var_dump($oauth->getAccessToken());die;
-            $response   = $oauth->curl_request("https://graph.connect.facebook.com/me/?", "GET", array(
-                'client_id'     => $oauth->client_id,
-                'client_secret' => $oauth->client_secret,
-                'oauth_token'   => $oauth->accessToken,
-            ));
-            $response   = json_decode($response);
-            var_dump($response);die;
-
-        $requestIds = $this->params()->fromRoute('requestIds');
-        $requestIds = explode(",", $requestIds);
-
-        foreach($requestIds as $requestId) {
-            $oauth   = new \Common\Service\Connector\SocialApi();
-
-            $oauth->provider      = "Facebook";
-            $oauth->client_id     = $config['app_id'];
-            $oauth->client_secret = $config['app_secret'];
-            $oauth->scope         = "email,publish_stream,status_update,friends_online_presence,user_birthday,user_location,user_work_history";
-            $oauth->redirect_uri  = $config['callback_url'];
-            $oauth->code          = 
-            $oauth->Initialize();
-
-            $response   = $oauth->curl_request("https://graph.facebook.com/me/apprequests", "GET", array(
-                'client_id'     => $oauth->client_id,
-                'client_secret' => $oauth->client_secret,
-                'oauth_token'   => $oauth->accessToken,
-            ));
-            var_dump($response);
-            $response   = json_decode($response);
-            die;
-
-            $connectorRepo = $this->EmPlugin()->getEntityManager()->getRepository('Common\Entity\Connector');
-            $connector     = $connectorRepo->findOneBy(array('requestId' => $requestId));
-
-            if (is_null($connector)) {
-                $this->flashMessenger()->addErrorMessage('Oeps, aanvraag niet gevonden.');
-                return $this->redirect()->toRoute('root');
-            }
-
-            $connector->setActive(true);
+        $connectorRepo = $this->EmPlugin()->getEntityManager()->getRepository('Common\Entity\Connector');
+        $connectors    = $connectorRepo->findBy(array(
+            'type'      => Connector::FEED_TYPE_FACEBOOK,
+            'uniqueId'  => $user['id']
+        ));
+        
+        foreach($connectors as $connector) {
+            $connector->setActive(true)
+                      ->setUniqueId($user['id'])
+                      ->setEmail($user['email'])
+                      ->setFirstname($user['first_name'])
+                      ->setLastname($user['last_name'])
+                      ->setAccessToken($accessToken);
             $this->EmPlugin()->getEntityManager()->flush();
         }
 
-        return array(
-            'config' => $config
-        );
-        //$this->flashMessenger()->addSuccessMessage('Uw aanvraag werd succesvol afgerond.');
-        //return $this->redirect()->toRoute('root');
+        return $this->redirect()->toRoute('root');
     }
 }

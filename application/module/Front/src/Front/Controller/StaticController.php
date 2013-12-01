@@ -19,7 +19,22 @@ class StaticController extends AbstractActionController {
         $requestIds = $this->params()->fromQuery('request_ids');
 
         if ($requestIds) {
-            return $this->redirect()->toUrl("https://www.facebook.com/dialog/oauth?client_id=" . $config['facebook']['app_id'] . "&scope=email,publish_stream,status_update,friends_online_presence,user_birthday,user_location,user_work_history&redirect_uri=http://www.familienieuws.eu/confirm");
+            require_once './../application/lib/facebookwrapper.php';
+            require_once './../application/lib/fbphotofeed.php';
+
+            $facebookWrapper = new \FacebookWrapper(array(
+                'appId'      => $config['facebook']['app_id'],
+                'secret'     => $config['facebook']['app_secret'],
+                'cookie'     => true,
+                'fileUpload' => false, // optional
+                'allowSignedRequest' => false // optional, but should be set to false for non-canvas apps
+            ));
+            $url = $facebookWrapper->getLoginUrl(array(
+                'redirect_uri' => "http://www.familienieuws.eu/confirm",
+                'scope'        => $config['facebook']['scope'],
+                'response_type'=> 'token'
+            ));
+            return $this->redirect()->toUrl($url);
         } else {
             $this->layout('layout/front');
 

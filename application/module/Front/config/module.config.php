@@ -75,17 +75,6 @@ return array(
                     )
                 )
             ),
-            /*'userconfirm'       => array(
-                'type'    => 'regex',
-                'options' => array(
-                    'regex'       => '/signup#([0-9a-zA-Z]*)&expires_in=5168',
-                    'defaults'    => array(
-                        'controller' => 'Front\Controller\User',
-                        'action'     => 'confirm',
-                    ),
-                    'spec' => '/blog/%accessToken%',
-                ),
-            ),*/
             'static'        => array(
                 'type'    => 'segment',
                 'options' => array(
