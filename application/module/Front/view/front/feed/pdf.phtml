@@ -1,1 +1,39 @@
-test
+<table style="width: 100%;">
+    <tr>
+        <td colspan="4"><img style="width: 100%;" src="<?php echo $this->serverUrl(); ?>/images/nieuwsbrief_header.png" /></td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td colspan="2" style="text-align: center; text-transform: uppercase; color: #50CBF4;">Familie Peeters Antwerpen 22/27</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="width: 25%;">&nbsp;</td>
+        <td style="width: 25%;">&nbsp;</td>
+        <td style="width: 25%;">&nbsp;</td>
+        <td style="width: 25%;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="width: 100%;">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="4" style="width: 100%;">&nbsp;</td>
+    </tr>
+
+        <?php $feed = $this->fbPhotoFeed->getPhotoFeed(); 
+            $i = 0;
+            while($i < 4 && list($key, $photo) = each($feed)):
+                if($i%2 == 0) echo '<tr>';
+            $imgurl = str_replace('https', 'http', $photo['images'][0]['source']);
+            $imginfo = getimagesize($imgurl);
+
+            $img = 'data:'. $imginfo['mime'].';base64,'.base64_encode(file_get_contents($imgurl));
+        ?>
+        <td colspan="2" style="width: 50%; vertical-align: top;">
+            <img style="width: 100%;" src="<?php echo $img; ?>" />
+            <p style="color: #50CBF4; font-style: italic; margin-bottom: 1%;">Xavier Vermeiren Zondag 1/12/2013</p>
+            <p><?php if(isset($photo['name'])) echo $photo['name']; ?></p>
+        </td>
+        <?php $i++; if($i%2 == 0) echo '</tr><tr><td>&nbsp;</td></tr><tr><td>&nbsp;</td></tr>'; endwhile; ?>
+
+</table>

@@ -1,4 +1,4 @@
-<p style="text-align: center;"><a class="button large default" href="#" id="fb-login">Print</a></p>
+<p style="text-align: center;"><a class="button large default" href="/feed/pdf" target="_blank" id="fb-login">Stuur het op</a></p>
 
 <div id="newspaper" class="clearfix">
 
@@ -12,10 +12,6 @@
       $i = 0; 
       $y = 1;
       while($i < 4 && list($key, $photo) = each($feed)): 
-          if($i%2 == 0) {
-              echo '<div class="col col'.$y.'">';
-              $y++;
-          }
 ?>
     
     <div class="item">
@@ -24,10 +20,10 @@
         <p class="title"><?php if(isset($photo['name'])) echo $photo['name']; ?></p>
     </div>
     
-<?php $i++; if($i%2 == 0) echo '</div>'; 
+<?php $i++; 
       endwhile; 
 ?>
 
 </div>
 
-<p style="text-align: center;"><a class="button large default" href="#" id="fb-login">Print</a></p>
+<p style="text-align: center;"><a class="button large default" href="/feed/pdf" target="_blank" id="fb-login">Stuur het op</a></p>
