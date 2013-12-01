@@ -1,65 +1,179 @@
 <!DOCTYPE html>
-<!--[if IE 8]>
-    <html class="no-js lt-ie9" lang="en">
-<![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-        <!--<link rel="stylesheet" href="/bundles/foundation-5.0.2/css/normalize.css" />
-        <link rel="stylesheet" href="/bundles/foundation-5.0.2/css/foundation.css" />
-        <link rel="stylesheet" href="/css/style.css" />
+        <title>FamilieNieuws </title>
+        <!-- Avada v3.2.0 -->
 
-        <script src="/bundles/foundation-5.0.2/js/vendor/custom.modernizr.js"></script>-->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            WebFontConfig = {
+                google: {families: ["Signika+Negative:400,400italic,700,700italic:latin,greek-ext,cyrillic,latin-ext,greek,cyrillic-ext,vietnamese", "Antic+Slab:400,400italic,700,700italic:latin,greek-ext,cyrillic,latin-ext,greek,cyrillic-ext,vietnamese"]}, custom: {families: ['FontAwesome'], urls: ['/wordpress/wp-content/themes/Avada/fonts/fontawesome.css']}
+            };
+            (function() {
+                var wf = document.createElement('script');
+                wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+                wf.type = 'text/javascript';
+                wf.async = 'true';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wf, s);
+            })();
+        </script>
+
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/wordpress/wp-content/themes/Avada/css/ie8.css" />
+        <![endif]-->
+
+        <!--[if IE]>
+        <link rel="stylesheet" href="/wordpress/wp-content/themes/Avada/css/ie.css" />
+        <![endif]-->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <style type="text/css">
+            @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait){
+                #wrapper .ei-slider{width:100% !important;}
+                body #header.sticky-header,body #header.sticky-header.sticky{display:none !important;}
+            }
+            @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape){
+                #wrapper .ei-slider{width:100% !important;}
+                body #header.sticky-header,body #header.sticky-header.sticky{display:none !important;}
+            }
+        </style>
+
+        <style type="text/css">
+            .animated { visibility:hidden; !important;}
+        </style>
+
+        <!--[if lt IE 10]>
+        <style type="text/css">
+            .animated { visibility:visible; !important;}
+        </style>
+        <![endif]-->
+
+        <link rel="shortcut icon" href="/wordpress/wp-content/uploads/2013/11/favicon.png" type="image/x-icon" />
+
+        <!-- For iPhone -->
+        <link rel="apple-touch-icon-precomposed" href="/wordpress/wp-content/uploads/2013/11/favicon1.png" />
+
+        <!-- For iPhone 4 Retina display -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/wordpress/wp-content/uploads/2013/11/favicon2.png" />
+
+        <!-- For iPad -->
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/wordpress/wp-content/uploads/2013/11/favicon3.png">
+
+        <!-- For iPad Retina display -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/wordpress/wp-content/uploads/2013/11/favicon4.png">
+
+        <meta name='robots' content='noindex,nofollow' />
+        <link rel="alternate" type="application/rss+xml" title="FamilieNieuws &raquo; Feed" href="/wordpress/?feed=rss2" />
+        <link rel="alternate" type="application/rss+xml" title="FamilieNieuws &raquo; Comments Feed" href="/wordpress/?feed=comments-rss2" />
+        <link rel="alternate" type="application/rss+xml" title="FamilieNieuws &raquo; welkom Comments Feed" href="/wordpress/?feed=rss2&#038;page_id=2" />
+        <link rel='stylesheet' id='style-css-css'  href='/wordpress/wp-content/themes/Avada/style.css?ver=3.5.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='media-css-css'  href='/wordpress/wp-content/themes/Avada/css/media.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='animate-css-css'  href='/wordpress/wp-content/themes/Avada/css/animate-custom.css' type='text/css' media='all' />
+        <link rel='stylesheet' id='rs-settings-css'  href='/wordpress/wp-content/plugins/revslider/rs-plugin/css/settings.css?ver=3.5.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='rs-captions-css'  href='/wordpress/wp-content/plugins/revslider/rs-plugin/css/captions.css?ver=3.5.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='layerslider_css-css'  href='/wordpress/wp-content/themes/Avada/framework/plugins/LayerSlider/css/layerslider.css?ver=4.6.5' type='text/css' media='all' />
+        <link rel='stylesheet' id='wooslider-flexslider-css'  href='/wordpress/wp-content/themes/Avada/framework/plugins/tf-flexslider/assets/css/flexslider.css?ver=1.0.1' type='text/css' media='all' />
+        <link rel='stylesheet' id='wooslider-common-css'  href='/wordpress/wp-content/themes/Avada/framework/plugins/tf-flexslider/assets/css/style.css?ver=1.0.1' type='text/css' media='all' />
+        <script type='text/javascript' src='/wordpress/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/plugins/revslider/rs-plugin/js/jquery.themepunch.revolution.min.js?ver=3.5.2'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/framework/plugins/LayerSlider/js/layerslider.kreaturamedia.jquery.js?ver=4.6.5'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/framework/plugins/LayerSlider/js/jquery-easing-1.3.js?ver=1.3.0'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/framework/plugins/LayerSlider/js/jquerytransit.js?ver=0.9.9'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/framework/plugins/LayerSlider/js/layerslider.transitions.js?ver=4.6.5'></script>
+        <script type='text/javascript' src='/wordpress/wp-includes/js/comment-reply.min.js?ver=3.5.2'></script>
+        <link rel="EditURI" type="application/rsd+xml" title="RSD" href="/wordpress/xmlrpc.php?rsd" />
+        <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="/wordpress/wp-includes/wlwmanifest.xml" /> 
+        <meta name="generator" content="WordPress 3.5.2" />
+        <link rel='canonical' href='/wordpress/' />
+        <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+
+        <!--[if lte IE 8]>
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+            var imgs, i, w;
+            var imgs = document.getElementsByTagName( 'img' );
+            for( i = 0; i < imgs.length; i++ ) {
+                w = imgs[i].getAttribute( 'width' );
+                imgs[i].removeAttribute( 'width' );
+                imgs[i].removeAttribute( 'height' );
+            }
+            });
+        </script>
+        <![endif]-->
+
+        <script type='text/javascript' src='/js/site.js'></script>
+        <link rel='stylesheet' id='wooslider-common-css'  href='/css/site.css' type='text/css' media='all' />
+
+        <!--[if lte IE 8]>
+            <script type="text/javascript" src="/wordpress/wp-content/themes/Avada/js/respond.js"></script>
+        <![endif]-->
     </head>
-    <body>
-        <nav class="top-bar">
-            <ul class="title-area">
-                <li class="name">
-                    <h1><a href="/">Title</a></h1>
-                </li>
-            </ul>
 
-            <section class="top-bar-section">
-                <ul class="right">
-                    <li class="divider hide-for-small"></li>
-                    <li><a href="/">HOME</a></li>
-                    <li><a href="/about">ABOUT</a></li>
-                    <li><a href="/pricing">PRICING</a></li>
-                    <?php if (!$this->auth()->hasIdentity()): ?>
-                        <li><a href="/login">LOGIN</a></li>
-                        <li><a href="/signup">SIGNUP</a></li>
-                    <?php else: ?>
-                        <li><a href="/profile">PROFILE</a></li>
-                        <li><a href="/logout">LOGOUT</a></li>
-                    <?php endif; ?>
-                    <li class="divider"></li>
-                    <li class="has-form">
-                        <form>
-                            <div class="row collapse">
-                                <div class="small-8 columns">
-                                    <input type="text">
-                                </div>
-                                <div class="small-4 columns">
-                                    <a href="#" class="alert button">Search</a>
-                                </div>
+    <body class="home page page-id-2 page-template page-template-full-width-php light ">
+
+        <?php echo $this->content; ?>
+
+        <footer class="footer-area">
+            <div class="avada-row">
+                <section class="columns columns-3">
+                    <article class="col">
+                        <div id="text-2" class="footer-widget-col widget_text"><h3>Waar wonen wij:</h3>			<div class="textwidget"><p>Balushops.com BVBA</p>
+                                <p>Mastendreef 22<br />
+                                    2970 Schilde<br />
+                                    België</p>
                             </div>
-                        </form>
-                    </li>
+                            <div style="clear:both;"></div></div>				</article>
+
+                    <article class="col">
+                        <div id="text-3" class="footer-widget-col widget_text"><h3>Bedrijfsgegevens:</h3>			<div class="textwidget"><p>BTW: BE 0839.859.652</p>
+                                <p>IBAN: BE07 3630 9371 4366<br />
+                                    BIC ING: BBRU BE BB<br />
+                                    ING België</p>
+                            </div>
+                            <div style="clear:both;"></div></div>				</article>
+
+                    <article class="col">
+                        <div id="text-4" class="footer-widget-col widget_text"><h3>Even praten?</h3>			<div class="textwidget"><p>Tel: +32 474 70 70 70<br />
+                                    Mail: hello@balushops.com</p>
+                            </div>
+                            <div style="clear:both;"></div></div>				</article>
+
+                    <article class="col last">
+                    </article>
+                </section>
+            </div>
+        </footer>
+        <footer id="footer">
+            <div class="avada-row">
+                <ul class="social-networks social-networks-dark">
                 </ul>
-            </section>
-        </nav>
+                <ul class="copyright">
+                    <li>Copyright 2013 BaluShops.com | All Rights Reserved | Developed by Koen Van de Wouw, Wim Kumpen, Xavier Vermeiren, Frederik van Dessel.</li>
+                </ul>
+            </div>
+        </footer>
+        </div><!-- wrapper -->
 
-        <div class="graybar">
-            <div><?php echo $this->title; ?></div>
-        </div>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;language=en"></script>
+        <!-- W3TC-include-js-head -->
 
-        <div id="content" style="clear:both;width:100%;padding-top:200px;float:left;">
-            <?php echo $this->content; ?>
-        </div>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/framework/plugins/tf-flexslider/assets/js/jquery.mousewheel.min.js?ver=2.1.0-20121206'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/framework/plugins/tf-flexslider/assets/js/jquery.flexslider.min.js?ver=2.1.0-20121206'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/js/modernizr-min.js'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/js/jquery.carouFredSel-6.2.1-min.js'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/js/jquery.prettyPhoto-min.js'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/js/jquery.flexslider-min.js'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/js/jquery.fitvids-min.js'></script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/js/gmap-min.js'></script>
+        <script type='text/javascript'>
+            /* <![CDATA[ */
+            var js_local_vars = {"dropdown_goto": "Go to..."};
+            /* ]]> */
+        </script>
+        <script type='text/javascript' src='/wordpress/wp-content/themes/Avada/js/main-min.js'></script>
     </body>
 </html>

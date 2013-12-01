@@ -24,4 +24,13 @@ return array(
         'to-sales'               => ' "Wim Kumpen" <info@wimkumpen.be>',
         'from-appstore-no-reply' => ' "No Reply" <info@wimkumpen.be>'
     ),
+
+    'connectors'    => array(
+        'facebook' => array(
+            'app_id'            => '249404298556640',
+            'app_secret'        => 'f52086f4a132e0169f611e3351447dd4',
+            'callback_url'      => '//www.familienieuws.eu/signup',
+            'scope'             => 'email,user_photos',
+        ),
+    )
 );

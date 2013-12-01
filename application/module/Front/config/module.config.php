@@ -34,7 +34,8 @@ return array(
 
     'controllers' => array(
         'invokables' => array(
-            'Front\Controller\Connector' => 'Front\Controller\ConnectorController',
+            'Front\Controller\Feed'      => 'Front\Controller\FeedController',
+            'Front\Controller\Static'    => 'Front\Controller\StaticController',
             'Front\Controller\User'      => 'Front\Controller\UserController',
         ),
     ),
@@ -55,15 +56,16 @@ return array(
                     ),
                 ),
             ),
-            'connector'     => array(
+            'user'          => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'     => '/connector/:action',
+                    'route'       => '/:action',
                     'constraints' => array(
-                        'action'     => 'index|close|delete|twitter|foursquare|facebook|instagram',
+                        'action'     => 'signup|invite|confirm',
                     ),
                     'defaults'    => array(
-                        'controller' => 'Front\Controller\Connector',
+                        'controller' => 'Front\Controller\User',
+                        'action'     => 'login',
                     ),
                 ),
                 'may_terminate' => true,
@@ -72,19 +74,6 @@ return array(
                         'type' => 'Wildcard'
                     )
                 )
-            ),
-            'user'          => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'       => '/:action[/:encryptedemail]',
-                    'constraints' => array(
-                        'action'     => 'signup|signedup|login|logout|passwordforgotten|confirm|passwordreset',
-                    ),
-                    'defaults'    => array(
-                        'controller' => 'Front\Controller\User',
-                        'action'     => 'login',
-                    ),
-                ),
             ),
             'static'        => array(
                 'type'    => 'segment',
@@ -95,6 +84,18 @@ return array(
                     ),
                     'defaults'    => array(
                         'controller' => 'Front\Controller\Static',
+                    ),
+                ),
+            ),
+            'feed'        => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'       => '/feed/:action',
+                    'constraints' => array(
+                        'action'     => 'page',
+                    ),
+                    'defaults'    => array(
+                        'controller' => 'Front\Controller\Feed',
                     ),
                 ),
             )

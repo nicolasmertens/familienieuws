@@ -1,0 +1,987 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-10-26 05:17+0500\n"
+"Last-Translator: Haris <info@theme-fusion.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SearchPath-0: E:\\projects\\Luke Beck\\Avada\\wp-content\\themes"
+"\\Avada\n"
+
+#, fuzzy
+msgid "Products"
+msgstr "Voir le projet"
+
+#, fuzzy
+msgid " Products"
+msgstr "Voir le projet"
+
+# $html .= '<li>';
+# $html .= '<span class="current-li"><a>'.__('Show', 'Avada').' <strong>'.$per_page.' '.__(' Products', 'Avada').'</strong></a></span>';
+# $html .= '<ul>';
+msgid "Show"
+msgstr ""
+
+# $html .= '<li class="'.(($pob == 'date') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'date').'">'.__('Sort by', 'Avada').' <strong>'.__('Date', 'Avada').'</strong></a></li>';
+# $html .= '<li class="'.(($pob == 'rating') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'rating').'">'.__('Sort by', 'Avada').' <strong>'.__('Rating', 'Avada').'</strong></a></li>';
+# $html .= '</ul>';
+msgid "Rating"
+msgstr ""
+
+# $html .= '<li class="'.(($pob == 'price') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'price').'">'.__('Sort by', 'Avada').' <strong>'.__('Price', 'Avada').'</strong></a></li>';
+# $html .= '<li class="'.(($pob == 'date') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'date').'">'.__('Sort by', 'Avada').' <strong>'.__('Date', 'Avada').'</strong></a></li>';
+# $html .= '<li class="'.(($pob == 'rating') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'rating').'">'.__('Sort by', 'Avada').' <strong>'.__('Rating', 'Avada').'</strong></a></li>';
+msgid "Date"
+msgstr ""
+
+# $html .= '<li class="'.(($pob == 'name') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'name').'">'.__('Sort by', 'Avada').' <strong>'.__('Name', 'Avada').'</strong></a></li>';
+# $html .= '<li class="'.(($pob == 'price') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'price').'">'.__('Sort by', 'Avada').' <strong>'.__('Price', 'Avada').'</strong></a></li>';
+# $html .= '<li class="'.(($pob == 'date') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'date').'">'.__('Sort by', 'Avada').' <strong>'.__('Date', 'Avada').'</strong></a></li>';
+msgid "Price"
+msgstr ""
+
+# $html .= '<li class="'.(($pob == 'default') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'default').'">'.__('Sort by', 'Avada').' <strong>'.__('Default Order', 'Avada').'</strong></a></li>';
+# $html .= '<li class="'.(($pob == 'name') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'name').'">'.__('Sort by', 'Avada').' <strong>'.__('Name', 'Avada').'</strong></a></li>';
+# $html .= '<li class="'.(($pob == 'price') ? 'current': '').'"><a href="'.tf_addURLParameter($query_string, 'product_orderby', 'price').'">'.__('Sort by', 'Avada').' <strong>'.__('Price', 'Avada').'</strong></a></li>';
+msgid "Name"
+msgstr ""
+
+#, fuzzy
+msgid "Default Order"
+msgstr "Récent"
+
+# $html .= '<li>';
+# $html .= '<span class="current-li"><a>'.__('Sort by', 'Avada').' <strong>'.__('Default Order', 'Avada').'</strong></a></span>';
+# $html .= '<ul>';
+msgid "Sort by"
+msgstr ""
+
+# wp_localize_script('avada', 'js_local_vars', array(
+# 'dropdown_goto' => __('Go to...', 'Avada')
+# )
+msgid "Go to..."
+msgstr ""
+
+msgid "Your comment is awaiting moderation."
+msgstr "Votre commentaire est en attente de validation."
+
+# <strong><?php echo get_comment_author_link() ?></strong>
+# <?php printf(__('%1$s at %2$s', 'Avada'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__(' - Edit', 'Avada'),'  ','') ?><?php comment_reply_link(array_merge( $args, array('reply_text' => __(' - Reply', 'Avada'), 'add_below' => 'comment', 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+# </div>
+msgid " - Reply"
+msgstr ""
+
+msgid " - Edit"
+msgstr "- Editer"
+
+msgid "%1$s at %2$s"
+msgstr "%1$s à %2$s"
+
+msgid "Theme Options"
+msgstr "Options du thème"
+
+# <?php if($instance['mobile']): ?>
+# <p class="mobile"><?php _e('Mobile:', 'Avada'); ?> <?php echo $instance['mobile']; ?></p>
+# <?php endif; ?>
+msgid "Mobile:"
+msgstr ""
+
+msgid "Hello, %s:"
+msgstr ""
+
+# <i class="fontawesome-icon medium circle-yes icon-envelope-alt"></i>
+# <span><?php echo __('Mail This', 'Avada'); ?></span><?php echo __('Product', 'Avada'); ?>
+# </a>
+msgid "Mail This"
+msgstr ""
+
+# <i class="fontawesome-icon medium circle-yes icon-pinterest"></i>
+# <span><?php echo __('Pin This', 'Avada'); ?></span><?php echo __('Product', 'Avada'); ?>
+# </a>
+msgid "Pin This"
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+# <i class="fontawesome-icon medium circle-yes icon-twitter"></i>
+# <span><?php echo __('Tweet This', 'Avada'); ?></span><?php echo __('Product', 'Avada'); ?>
+# </a>
+msgid "Tweet This"
+msgstr ""
+
+# <i class="fontawesome-icon medium circle-yes icon-facebook"></i>
+# <span><?php echo __('Share On', 'Avada'); ?></span>Facebook
+# </a>
+msgid "Share On"
+msgstr ""
+
+msgid "Change Address"
+msgstr ""
+
+#, fuzzy
+msgid "View Orders"
+msgstr "Voir le projet"
+
+msgid "Re-enter password"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Register An Account"
+msgstr ""
+
+msgid "Lost Password?"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Username or Email Address"
+msgstr ""
+
+msgid "I'm a Returning Customer"
+msgstr ""
+
+msgid "Enter the following fields to change the password on your account"
+msgstr ""
+
+msgid "Change Password"
+msgstr ""
+
+#, fuzzy
+msgid "Show details"
+msgstr "Afficher les détails"
+
+msgid "Review &amp Payment"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Review &amp; Payment"
+msgstr ""
+
+msgid "Shipping Address"
+msgstr ""
+
+msgid "Billing Address"
+msgstr ""
+
+msgid "Have A Promotional Code?"
+msgstr ""
+
+msgid "Item"
+msgstr ""
+
+msgid "You Have %d items In Your Cart"
+msgstr ""
+
+msgid "says"
+msgstr ""
+
+msgid "Recent"
+msgstr "Récent"
+
+msgid "Popular"
+msgstr "Populaire"
+
+msgid "Web:"
+msgstr ""
+
+msgid "Email:"
+msgstr ""
+
+msgid "Fax:"
+msgstr ""
+
+msgid "Phone:"
+msgstr ""
+
+msgid "Related Posts"
+msgstr "Articles connexes"
+
+msgid "About the Author:"
+msgstr "À propos de l'auteur :"
+
+msgid "Share This Story, Choose Your Platform!"
+msgstr "Partagez cette histoire , choisissez votre plate-forme !"
+
+msgid "Related Projects"
+msgstr "Projets connexes"
+
+msgid "Copyright"
+msgstr ""
+
+#, fuzzy
+msgid "Project URL"
+msgstr "Voir le projet"
+
+msgid "Tags"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "Skills Needed"
+msgstr ""
+
+#, fuzzy
+msgid "Project Details"
+msgstr "Afficher les détails"
+
+msgid "Project Description"
+msgstr ""
+
+msgid "If you want to rephrase your query, here is your chance:"
+msgstr ""
+
+msgid "Try again!"
+msgstr ""
+
+msgid "Oops!"
+msgstr ""
+
+msgid "Couldn't find what you're looking for!"
+msgstr ""
+
+# <h2><?php echo __('Need a new search?', 'Avada'); ?></h2>
+# <p><?php echo __('If you didn\'t find what you were looking for, try a new search!', 'Avada'); ?></p>
+# <form class="seach-form" role="search" method="get" action="<?php echo home_url( '/' ); ?>">
+msgid "If you didn't find what you were looking for, try a new search!"
+msgstr ""
+
+#, fuzzy
+msgid "Need a new search?"
+msgstr "Rechercher"
+
+msgid "Search ..."
+msgstr "Rechercher ..."
+
+msgid "View Project"
+msgstr "Voir le projet"
+
+msgid "Learn More"
+msgstr "En savoir plus"
+
+# <?php elseif ( is_year() ) : ?>
+# <?php printf( __( 'Yearly Archives: %s', 'Avada' ), '<span>' . get_the_date( _x( 'Y', 'yearly archives date format', 'Avada' ) ) . '</span>' ); ?>
+# <?php elseif ( is_author() ) : ?>
+msgid "Y"
+msgstr ""
+
+# <?php elseif ( is_month() ) : ?>
+# <?php printf( __( 'Monthly Archives: %s', 'Avada' ), '<span>' . get_the_date( _x( 'F Y', 'monthly archives date format', 'Avada' ) ) . '</span>' ); ?>
+# <?php elseif ( is_year() ) : ?>
+msgid "F Y"
+msgstr ""
+
+msgid "Yearly Archives: %s"
+msgstr ""
+
+msgid "Monthly Archives: %s"
+msgstr ""
+
+msgid "Daily Archives: %s"
+msgstr ""
+
+msgid "Error 404 Page"
+msgstr ""
+
+msgid "Search results for:"
+msgstr "Résultats de la recherche&nbsp;: %s"
+
+msgid "Item(s)"
+msgstr ""
+
+msgid "Cart"
+msgstr ""
+
+msgid "Checkout"
+msgstr ""
+
+#, fuzzy
+msgid "View Cart"
+msgstr "Voir le projet"
+
+msgid "Logout"
+msgstr ""
+
+# <p class="submit">
+# <input type="submit" name="wp-submit" id="wp-submit" class="button small default comment-submit" value="<?php _e('Log In', 'Avada'); ?>">
+# <input type="hidden" name="redirect_to" value="<?php echo $_SERVER['HTTP_REFERER']; ?>">
+msgid "Log In"
+msgstr ""
+
+msgid "Remember Me"
+msgstr ""
+
+msgid "My Account"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Search"
+msgstr "Rechercher"
+
+msgid "404 - Page not Found"
+msgstr "404 - La page n'existe pas ou plus"
+
+msgid "Home"
+msgstr "Accueil"
+
+msgid "Next"
+msgstr "Suivant"
+
+msgid "Previous"
+msgstr "Précédent"
+
+msgid "All"
+msgstr "Tous"
+
+msgid "Submit Form"
+msgstr "Soumettre le formulaire"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Subject"
+msgstr "Sujet"
+
+msgid "for using my contact form! Your email was successfully sent!"
+msgstr ""
+"pour utiliser notre formulaire de contact ! Votre email a été envoyé avec "
+"succès !"
+
+msgid "Thank you"
+msgstr "Merci beaucoup"
+
+msgid ""
+"Please check if you've filled all the fields with valid information. Thank "
+"you."
+msgstr ""
+"S'il vous plaît vérifiez si vous avez rempli tous les champs avec des "
+"informations valides. Merci."
+
+msgid "Website"
+msgstr "Site Web"
+
+msgid "Email (required)"
+msgstr "Votre courriel (nécessaire)"
+
+msgid "Name (required)"
+msgstr "Votre Nom (nécessaire)"
+
+msgid "Post Comment"
+msgstr "Publier ce commentaire"
+
+msgid "Comment..."
+msgstr "Commentaire ..."
+
+msgid "Log out &raquo;"
+msgstr "Vous déconnecter &raquo;"
+
+msgid "Log out of this account"
+msgstr ""
+
+msgid "Logged in as"
+msgstr "Connecté en tant que"
+
+msgid "You must be %slogged in%s to post a comment."
+msgstr ""
+
+msgid "Leave A Comment"
+msgstr "Ecrire un commentaire"
+
+msgid "Comments are closed."
+msgstr "Les commentaires sont fermés ."
+
+msgid "One Comment"
+msgstr "Un commentaire"
+
+msgid "No Comments"
+msgstr "Aucun commentaire"
+
+msgid "This post is password protected. Enter the password to view comments."
+msgstr ""
+"Cet article est protégé par un mot de passe. Saisissez le mot de passe pour "
+"lire les commentaires."
+
+# <p class="bbp-user-topic-count"><span class="bold"><?php printf( __( 'Topics Started:',  'Avada' )); ?> </span><?php printf(bbp_get_user_topic_count_raw() ); ?></p>
+# <p class="bbp-user-reply-count"><span class="bold"><?php printf( __( 'Replies Created:', 'Avada' )); ?> </span><?php printf(bbp_get_user_reply_count_raw() ); ?></p>
+# </div>
+msgid "Replies Created:"
+msgstr ""
+
+# <p class="bbp-user-forum-role"><span class="bold"><?php  printf( __( 'Forum Role:',      'Avada' )); ?> </span><?php printf(bbp_get_user_display_role() ); ?></p>
+# <p class="bbp-user-topic-count"><span class="bold"><?php printf( __( 'Topics Started:',  'Avada' )); ?> </span><?php printf(bbp_get_user_topic_count_raw() ); ?></p>
+# <p class="bbp-user-reply-count"><span class="bold"><?php printf( __( 'Replies Created:', 'Avada' )); ?> </span><?php printf(bbp_get_user_reply_count_raw() ); ?></p>
+msgid "Topics Started:"
+msgstr ""
+
+#
+# <p class="bbp-user-forum-role"><span class="bold"><?php  printf( __( 'Forum Role:',      'Avada' )); ?> </span><?php printf(bbp_get_user_display_role() ); ?></p>
+# <p class="bbp-user-topic-count"><span class="bold"><?php printf( __( 'Topics Started:',  'Avada' )); ?> </span><?php printf(bbp_get_user_topic_count_raw() ); ?></p>
+msgid "Forum Role:"
+msgstr ""
+
+#, fuzzy
+msgid "Post count: %s"
+msgstr "Publier ce commentaire"
+
+#, fuzzy
+msgid "Search the Forum..."
+msgstr "Rechercher ..."
+
+#
+# <?php bbp_topic_tag_list( bbp_get_topic_id(), array( 'before' => '<div class="bbp-topic-tags"><p>' . esc_html__( 'Tags:', 'Avada' ) . '&nbsp;', 'sep'    => ', ', 'after'  => '</p></div>' ) ); ?>
+#
+msgid "Tags:"
+msgstr ""
+
+# <div class="author_description">
+# <h3 class='author_title'><?php echo __("About",'Avada').' '.$name; ?>
+# <?php if(current_user_can('edit_users') || get_current_user_id() == $author_id): ?>
+msgid "About"
+msgstr ""
+
+# if(empty($description)) {
+# $description  = __("This author has not yet filled in any details.",'Avada');
+# $description .= '</br>'.sprintf( __( 'So far %s has created %s entries.' ), $name, count_user_posts( $author_id ) );
+msgid "This author has not yet filled in any details."
+msgstr ""
+
+msgid "1"
+msgstr ""
+
+msgid "Read More"
+msgstr "Lire la suite"
+
+msgid "Comments"
+msgstr "Commentaires"
+
+msgid "1 Comment"
+msgstr "1 Commentaire"
+
+msgid "0 Comments"
+msgstr "0 Commentaires"
+
+msgid "By"
+msgstr "Par"
+
+msgid "Can't find what you need? Take a moment and do a search below!"
+msgstr ""
+"Vous ne trouvez pas ce que vous cherchez ? Prenez un moment et faites une "
+"recherche ci-dessous !"
+
+msgid "Search Our Website"
+msgstr "Recherchez dans notre site Web"
+
+msgid "Here are some useful links:"
+msgstr "Voilà quelques liens utiles"
+
+#~ msgid "Oops, This Page Could Not Be Found!"
+#~ msgstr "Oups, la page n'existe pas ou plus…"
+
+#~ msgid "Install Required Plugins"
+#~ msgstr "Installer des plugins obligatoires"
+
+#~ msgid "Install Plugins"
+#~ msgstr "Installer des plugins"
+
+#~ msgid "Installing Plugin: %s"
+#~ msgstr "Installation du plugin : %s"
+
+#~ msgid "Something went wrong with the plugin API."
+#~ msgstr "Quelque chose n'allait pas avec l'API plug-in."
+
+#~ msgid "Return to Required Plugins Installer"
+#~ msgstr "Retour à l'installateur plugins obligatoire"
+
+#~ msgid "Plugin activated successfully."
+#~ msgstr "Plugin activé avec succès ."
+
+#~ msgid "All plugins installed and activated successfully. %s"
+#~ msgstr "Tous les plugins installés et activés avec succès . %s"
+
+#~ msgid "Last Backup : "
+#~ msgstr "Dernière sauvegarde :"
+
+#~ msgid "Upload"
+#~ msgstr "Téléchargez"
+
+#~ msgid "Save All Changes"
+#~ msgstr "Enregistrer toutes les modifications"
+
+#~ msgid "Options Reset"
+#~ msgstr "Les options ont été réinitialisé"
+
+#~ msgid "Options"
+#~ msgstr "Options"
+
+#~ msgid "Gallery"
+#~ msgstr "Galerie"
+
+#~ msgid "Previously Uploaded"
+#~ msgstr "Téléchargé vers l'amont recemment"
+
+#~ msgid "Something went wrong."
+#~ msgstr "Quelque chose s'est mal passé ."
+
+#, fuzzy
+#~ msgid "Return to the dashboard"
+#~ msgstr "Retour au Dashboard"
+
+#, fuzzy
+#~ msgid "The following plugin was activated successfully:"
+#~ msgstr "Le plugin suivant a été activé avec succès :% s"
+
+#~ msgid "All plugins installed and activated successfully. %1$s"
+#~ msgstr "Tous les plugins installés et activés avec succès . %1$s"
+
+#~ msgid "Dismiss this notice"
+#~ msgstr "Rejeter cet avis"
+
+#~ msgid "External Link"
+#~ msgstr "Lien externe"
+
+#~ msgid "Private Repository"
+#~ msgstr "Dépôt privé"
+
+#~ msgid "Pre-Packaged"
+#~ msgstr "Pré-emballés"
+
+#~ msgid "WordPress Repository"
+#~ msgstr "Dépôt de WordPress"
+
+#~ msgid "Required"
+#~ msgstr "Requis"
+
+#~ msgid "Recommended"
+#~ msgstr "Recommandé"
+
+#~ msgid "Not Installed"
+#~ msgstr "Pas installé"
+
+#~ msgid "Installed But Not Activated"
+#~ msgstr "Installé mais pas activé"
+
+#~ msgid ""
+#~ "No plugins to install or activate. <a href=\"%1$s\" title=\"Return to the "
+#~ "Dashboard\">Return to the Dashboard</a>"
+#~ msgstr ""
+#~ "Aucun plugin à installer ou activer . <a href=\"%1$s\" title=\"Retour au "
+#~ "Dashboard\">Retour au Dashboard</a>"
+
+#~ msgid "Plugin"
+#~ msgstr "Plugin"
+
+#~ msgid "Source"
+#~ msgstr "Source"
+
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "Status"
+#~ msgstr "Statut"
+
+#~ msgid "Install"
+#~ msgstr "Installer"
+
+#~ msgid "Activate"
+#~ msgstr "Activer"
+
+#~ msgid "Install package not available."
+#~ msgstr "Le paquet à installer n'est pas disponible ."
+
+#~ msgid ""
+#~ "Downloading install package from <span class=\"code\">%s</span>&#8230;"
+#~ msgstr ""
+#~ "Téléchargement du package d'installation de <span class=\"code\">%s</"
+#~ "span>&#8230;"
+
+#~ msgid "Unpacking the package&#8230;"
+#~ msgstr "Déballage du paquet&#8230;"
+
+#~ msgid "Installing the plugin&#8230;"
+#~ msgstr "Installation du plugin&#8230;"
+
+#~ msgid "Plugin install failed."
+#~ msgstr "L'installation du plugin a échoué ."
+
+#~ msgid "Plugin installed successfully."
+#~ msgstr "Plugin installé avec succès ."
+
+#~ msgid "Plugin activation failed."
+#~ msgstr "L'activation du plugin a échoué ."
+
+#~ msgid ""
+#~ "The installation and activation process is starting. This process may "
+#~ "take a while on some hosts, so please be patient."
+#~ msgstr ""
+#~ "Le processus d'installation et d'activation commence . Ce processus peut "
+#~ "prendre un certain temps sur certains hôtes , donc s'il vous plaît soyez "
+#~ "patient ."
+
+#~ msgid "%1$s installed and activated successfully."
+#~ msgstr "%1$s a été installé et activé avec succès ."
+
+#~ msgid "Show Details"
+#~ msgstr "Afficher les détails"
+
+#~ msgid "Hide Details"
+#~ msgstr "Masquer les détails"
+
+#~ msgid "All installations and activations have been completed."
+#~ msgstr "Toutes les installations et les activations ont été achevés."
+
+#~ msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+#~ msgstr "Installation et activation du plugin %1$s (%2$d/%3$d)"
+
+#~ msgid ""
+#~ "The installation process is starting. This process may take a while on "
+#~ "some hosts, so please be patient."
+#~ msgstr ""
+#~ "Le processus d'installation commence. Ce processus peut prendre un "
+#~ "certain temps sur certains hôtes, donc s'il vous plaît soyez patient."
+
+#~ msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+#~ msgstr ""
+#~ "Une erreur s'est produite lors de l'installation de %1$s: <strong>%2$s</"
+#~ "strong>."
+
+#~ msgid "The installation of %1$s failed."
+#~ msgstr "L'installation de %1$s a échoué."
+
+#~ msgid "%1$s installed successfully."
+#~ msgstr "%1$s installé avec succès ."
+
+#~ msgid "All installations have been completed."
+#~ msgstr "Toutes les installations ont été complétées."
+
+#~ msgid "Installing Plugin %1$s (%2$d/%3$d)"
+#~ msgstr "Installation du plugin%1$s (%2$d/%3$d)"
+
+#~ msgid "Return to the Dashboard"
+#~ msgstr "Retour au Dashboard"
+
+#, fuzzy
+#~ msgid "Previous Post"
+#~ msgstr "Précédent"
+
+#, fuzzy
+#~ msgid "Next Post"
+#~ msgstr "Articles connexes"
+
+#, fuzzy
+#~ msgid "Downloading upgrade package from the Envato API&#8230;"
+#~ msgstr ""
+#~ "Téléchargement du package d'installation de <span class=\"code\">%s</"
+#~ "span>&#8230;"
+
+#, fuzzy
+#~ msgid "Downloading install package from the Envato API&#8230;"
+#~ msgstr ""
+#~ "Téléchargement du package d'installation de <span class=\"code\">%s</"
+#~ "span>&#8230;"
+
+#, fuzzy
+#~ msgid "Slide Options"
+#~ msgstr "Options"
+
+#, fuzzy
+#~ msgid "Slide options"
+#~ msgstr "Options du thème"
+
+#, fuzzy
+#~ msgid "Preview"
+#~ msgstr "Précédent"
+
+#, fuzzy
+#~ msgid "Other options"
+#~ msgstr "Options"
+
+#, fuzzy
+#~ msgid "Show until"
+#~ msgstr "Afficher les détails"
+
+#, fuzzy
+#~ msgid "Alt"
+#~ msgstr "Tous"
+
+#, fuzzy
+#~ msgid "Save changes"
+#~ msgstr "Enregistrer toutes les modifications"
+
+#, fuzzy
+#~ msgid "Actions"
+#~ msgstr "Options"
+
+#, fuzzy
+#~ msgid "Edit"
+#~ msgstr "- Editer"
+
+#, fuzzy
+#~ msgid "Read more"
+#~ msgstr "Lire la suite"
+
+#, fuzzy
+#~ msgid "Editor"
+#~ msgstr "- Editer"
+
+#, fuzzy
+#~ msgid "Show Examples"
+#~ msgstr "Afficher les détails"
+
+#, fuzzy
+#~ msgid "Search %s"
+#~ msgstr "Rechercher"
+
+#, fuzzy
+#~ msgid "Slideshow Settings"
+#~ msgstr "Afficher les détails"
+
+#, fuzzy
+#~ msgid "Select options"
+#~ msgstr "Options du thème"
+
+#, fuzzy
+#~ msgid "View options"
+#~ msgstr "Options du thème"
+
+#, fuzzy
+#~ msgid "Details"
+#~ msgstr "Afficher les détails"
+
+#, fuzzy
+#~ msgid "Order Details"
+#~ msgstr "Masquer les détails"
+
+#, fuzzy
+#~ msgid "Search results for &ldquo;"
+#~ msgstr "Résultats de la recherche&nbsp;: %s"
+
+#, fuzzy
+#~ msgid "Related Products"
+#~ msgstr "Projets connexes"
+
+#, fuzzy
+#~ msgid "Your comment is awaiting approval"
+#~ msgstr "Votre commentaire est en attente de validation."
+
+#, fuzzy
+#~ msgid "Error 404 - page not found"
+#~ msgstr "404 - La page n'existe pas ou plus"
+
+#, fuzzy
+#~ msgid "Blog Posts"
+#~ msgstr "Articles connexes"
+
+#, fuzzy
+#~ msgid "Post Number"
+#~ msgstr "Publier ce commentaire"
+
+#, fuzzy
+#~ msgid "Clone Column"
+#~ msgstr "Un commentaire"
+
+#, fuzzy
+#~ msgid "Form Element Options"
+#~ msgstr "Options du thème"
+
+#, fuzzy
+#~ msgid "Submit"
+#~ msgstr "Soumettre le formulaire"
+
+#, fuzzy
+#~ msgid "Edit Gallery"
+#~ msgstr "Galerie"
+
+#, fuzzy
+#~ msgid "Add/Edit Gallery"
+#~ msgstr "Galerie"
+
+#, fuzzy
+#~ msgid "Gallery Style"
+#~ msgstr "Galerie"
+
+#, fuzzy
+#~ msgid "Gallery Columns"
+#~ msgstr "Galerie"
+
+#, fuzzy
+#~ msgid "Message Colors"
+#~ msgstr "Message"
+
+#, fuzzy
+#~ msgid "Page Content"
+#~ msgstr "Un commentaire"
+
+#, fuzzy
+#~ msgid "1 Columns"
+#~ msgstr "1 Commentaire"
+
+#, fuzzy
+#~ msgid "Comment"
+#~ msgstr "Commentaires"
+
+#, fuzzy
+#~ msgid "Sorting Options"
+#~ msgstr "Options"
+
+#, fuzzy
+#~ msgid "Caption Text"
+#~ msgstr "Les options ont été réinitialisé"
+
+#, fuzzy
+#~ msgid "Table Caption"
+#~ msgstr "Options du thème"
+
+#, fuzzy
+#~ msgid "Website Link"
+#~ msgstr "Site Web"
+
+#, fuzzy
+#~ msgid "Website Name"
+#~ msgstr "Site Web"
+
+#, fuzzy
+#~ msgid "Custom Elements"
+#~ msgstr "Commentaires"
+
+#, fuzzy
+#~ msgid "View Product"
+#~ msgstr "Voir le projet"
+
+#, fuzzy
+#~ msgid "Search Products"
+#~ msgstr "Résultats de la recherche&nbsp;: %s"
+
+#, fuzzy
+#~ msgid "View Order"
+#~ msgstr "Voir le projet"
+
+#, fuzzy
+#~ msgid "Search Orders"
+#~ msgstr "Recherchez dans notre site Web"
+
+#, fuzzy
+#~ msgid "Search Order statuses"
+#~ msgstr "Recherchez dans notre site Web"
+
+#, fuzzy
+#~ msgid "Search Coupons"
+#~ msgstr "Rechercher"
+
+#, fuzzy
+#~ msgid "Popularity"
+#~ msgstr "Populaire"
+
+#, fuzzy
+#~ msgid "Search results for &quot;%1$s&quot;"
+#~ msgstr "Résultats de la recherche&nbsp;: %s"
+
+#, fuzzy
+#~ msgid "404 Not Found"
+#~ msgstr "404 - La page n'existe pas ou plus"
+
+#, fuzzy
+#~ msgid "New Message"
+#~ msgstr "Message"
+
+#, fuzzy
+#~ msgid "Your Message:"
+#~ msgstr "Message"
+
+#, fuzzy
+#~ msgid "State:"
+#~ msgstr "Statut"
+
+#, fuzzy
+#~ msgid "Map Type:"
+#~ msgstr "Type"
+
+#, fuzzy
+#~ msgid "Add to Gallery"
+#~ msgstr "Galerie"
+
+#~ msgid "The following plugin was activated successfully: %s."
+#~ msgstr "Le plugin suivant a été activé avec succès :% s"
+
+#, fuzzy
+#~ msgid "search results for:"
+#~ msgstr "Résultats de la recherche&nbsp;: %s"
+
+#, fuzzy
+#~ msgid "search result for:"
+#~ msgstr "Résultats de la recherche&nbsp;: %s"
+
+#, fuzzy
+#~ msgid ""
+#~ "This post is password protected. Enter the password to view any comments."
+#~ msgstr ""
+#~ "Cet article est protégé par un mot de passe. Saisissez le mot de passe "
+#~ "pour lire les commentaires."
+
+#, fuzzy
+#~ msgid "&laquo; Older Comments"
+#~ msgstr "Aucun commentaire"
+
+#, fuzzy
+#~ msgid "Newer Comments &raquo;"
+#~ msgstr "Aucun commentaire"
+
+#, fuzzy
+#~ msgid "Comments<br/>Off"
+#~ msgstr "Commentaires"
+
+#, fuzzy
+#~ msgid "Comments Disabled"
+#~ msgstr "Les commentaires sont fermés ."
+
+#, fuzzy
+#~ msgid "(Edit)"
+#~ msgstr "- Editer"
+
+#, fuzzy
+#~ msgid "Interesting links"
+#~ msgstr "Installation du plugin : %s"
+
+#, fuzzy
+#~ msgid "&larr; Older Comments"
+#~ msgstr "Un commentaire"
+
+#, fuzzy
+#~ msgid "Newer Comments &rarr;"
+#~ msgstr "Aucun commentaire"
+
+#, fuzzy
+#~ msgid "Leave a comment"
+#~ msgstr "Ecrire un commentaire"
+
+#, fuzzy
+#~ msgid "One comment so far"
+#~ msgstr "Un commentaire"
+
+#, fuzzy
+#~ msgid "Search Results for: %s"
+#~ msgstr "Résultats de la recherche&nbsp;: %s"
+
+#, fuzzy
+#~ msgid "&larr; Previous"
+#~ msgstr "Précédent"
+
+#~ msgid "You must be <a href=\""
+#~ msgstr "Vous devez être <a href =\""

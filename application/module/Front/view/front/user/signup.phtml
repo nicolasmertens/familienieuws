@@ -1,35 +1,72 @@
-<?php
-    $form = $this->form;
-    $form->prepare();
-    
-    $this->formRow()->setInputErrorClass('error');
-?>
+<div class="demo-sep sep-none" style="margin-top:-55px;"></div>
+    <div class="fullwidth-box" style="background-color:#fffff;background-image:url(http://www.antwerpwebs.be/wp-content/uploads/2013/11/bg_white.png);background-repeat:no-repeat;background-position:top left;background-attachment:scroll;border-top: solid 0px;border-bottom: solid 0px;padding-top:20px;padding-bottom:15px;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
+        <div class="avada-row">
+            <img class="aligncenter size-full wp-image-83" width="436" height="121" alt="background_white_logo" src="http://www.antwerpwebs.be/wp-content/uploads/2013/11/background_white_logo.png">
+            <br>
+        </div>
+    </div>
+    <div class="demo-sep sep-none" style="margin-top:25px;"></div>
+    <div class="fullwidth-box" style="background-color:;background-image:url();background-repeat:no-repeat;background-position:top left;background-attachment:scroll;border-top:0px solid #f6f6f6;border-bottom:0px solid #f6f6f6;padding-top:0px;padding-bottom:0px;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
+        <div class="avada-row">
+            <div class="one_half">
+                <h1>Fantastisch! Je bent aangemeld.</h1>
+                <h2>Waarheen sturen we het wekelijkse krantje?</h2>
+            </div>
 
-<div class="row">
-    <div class="large-4 large-offset-4 columns">
-        <?php echo $this->partial('/partial/flashmessages', array('form' => $form)); ?>
+            <div class="one_half last">
+                <div class="counters-circle clearfix">
+                <script type="text/javascript">
+                    jQuery(document).ready(function() {
+                    var opts = {
+                    lines: 12, // The number of lines to draw
+                    angle: 0.5, // The length of each line
+                    lineWidth: 0.05, // The line thickness
+                    colorStart: '#50cbf4', // Colors
+                    colorStop: '#50cbf4', // just experiment with them
+                    strokeColor: '#f6f6f6', // to see which ones work best for you
+                    generateGradient: false
+                    };
+                    var gauge_1 = new Donut(document.getElementById('counter-circle-1')).setOptions(opts); // create sexy gauge!
+                    gauge_1.maxValue = 100; // set max gauge value
+                    gauge_1.animationSpeed = 128; // set animation speed (32 is default value)
+                    gauge_1.set(60); // set actual value
+                    });
+                </script>
+                <div class="counter-circle-wrapper">
+                    <canvas id="counter-circle-1" class="counter-circle" height="220" width="220"></canvas>
+                    <div class="counter-circle-content">50%</div>
+                </div>
+                </div>
+            </div>
+
+            <div class="clearboth"></div>
+            <div class="demo-sep sep-none" style="margin-top:75px;"></div>
+            <div class="fullwidth-box" style="background-color:#ffffff;background-image:url();background-repeat:no-repeat;background-position:top left;background-attachment:scroll;border-top:0px solid #f6f6f6;border-bottom:0px solid #f6f6f6;padding-top:0px;padding-bottom:0px;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
+                <div class="avada-row"></div>
+            </div>
+
+            <?php
+                $form = $this->form;
+                $form->prepare();
+
+                $this->formRow()->setInputErrorClass('error');
+            ?>
+
+            <div class="row">
+                <div class="large-4 large-offset-4 columns">
+                    <?php echo $this->partial('/partial/flashmessages', array('form' => $form)); ?>
+                </div>
+            </div>
+
+            <?php echo $this->form()->openTag($form); ?>
+                <?php echo $this->formRow($form->get('name'), null, false); ?>
+                <?php echo $this->formRow($form->get('street'), null, false); ?>
+                <?php echo $this->formRow($form->get('number'), null, false); ?>
+                <?php echo $this->formRow($form->get('zipcode'), null, false); ?>
+                <?php echo $this->formRow($form->get('city'), null, false); ?>
+                <?php echo $this->formRow($form->get('email'), null, false); ?>
+                <?php echo $this->formSubmit($form->get('submit')); ?>
+            <?php echo $this->form()->closeTag(); ?>
+        </div>
     </div>
 </div>
-
-<?php echo $this->form()->openTag($form); ?>
-    <div class="row">
-        <div class="large-4 large-offset-4 columns">
-            <?php echo $this->formRow($form->get('email'), null, false); ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-4 large-offset-4 columns">
-            <?php echo $this->formRow($form->get('password'), null, false); ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-4 large-offset-4 columns">
-            <?php echo $this->formRow($form->get('rePassword'), null, false); ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="large-4 large-offset-4 columns">
-            <?php echo $this->formSubmit($form->get('submit')); ?>
-        </div>
-    </div>
-<?php echo $this->form()->closeTag(); ?>

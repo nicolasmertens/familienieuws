@@ -14,7 +14,7 @@ return array(
                     'port'     => '3306',
                     'user'     => 'root',
                     'password' => '',
-                    'dbname'   => 'wim_social',
+                    'dbname'   => 'idealabs_familienieuws',
                 ),
                 'doctrineTypeMappings' => array('enum' => 'string'),
             )

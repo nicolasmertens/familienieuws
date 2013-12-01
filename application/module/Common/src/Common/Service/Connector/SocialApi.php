@@ -126,7 +126,7 @@ class SocialApi {
                 $this->oauth_version = "2.0";
                 $this->dialogUrl = 'https://www.facebook.com/dialog/oauth?client_id=' . $this->client_id . '&redirect_uri=' . $this->redirect_uri . '&scope=' . $this->scope . '&state=' . $this->state;
                 $this->accessTokenUrl = 'https://graph.facebook.com/oauth/access_token';
-                $this->responseType = "code";
+                $this->responseType = "token";
                 $this->userProfileUrl = "https://graph.connect.facebook.com/me/?";
                 $this->header = "";
                 break;
@@ -456,16 +456,17 @@ class SocialApi {
         }
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // remove in production, need this for facebook in sandbox mode
-curl_setopt($ch, CURLOPT_VERBOSE, true);
-$verbose = fopen('php://temp', 'rw+');
-curl_setopt($ch, CURLOPT_STDERR, $verbose);
+
+//curl_setopt($ch, CURLOPT_VERBOSE, true);
+//$verbose = fopen('php://temp', 'rw+');
+//curl_setopt($ch, CURLOPT_STDERR, $verbose);
 
         $response = curl_exec($ch);
         curl_close($ch);
 
-rewind($verbose);
-$verboseLog = stream_get_contents($verbose);
-echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
+//rewind($verbose);
+//$verboseLog = stream_get_contents($verbose);
+//echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
 
         return $response;
     }

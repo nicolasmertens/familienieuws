@@ -2,16 +2,12 @@
 
 namespace Front\Controller;
 
-use Common\Entity\User,
-    Common\Validator\UserExists;
+use Common\Entity\Connector,
+    Common\Entity\Newspaper;
 
-use Front\Form\LoginForm,
-    Front\Form\PasswordForgottenForm,
-    Front\Form\PasswordResetForm,
-    Front\Form\SignupForm;
+use Front\Form\SignupForm;
 
-use Zend\Mvc\Controller\AbstractActionController,
-    Zend\Validator\Identical;
+use Zend\Mvc\Controller\AbstractActionController;
 
 class UserController extends AbstractActionController {
 
@@ -22,260 +18,183 @@ class UserController extends AbstractActionController {
 
     public function signupAction()
     {
-        if ($this->auth()->hasIdentity()) {
-            return $this->redirect()->toRoute('root', array());
-        }
+        $config  = $this->getServiceLocator()->get('config');
+        $config  = $config['connectors']['facebook'];
 
         $request = $this->getRequest();
 
+        $oauth   = new \Common\Service\Connector\SocialApi();
+
+        $oauth->provider      = "Facebook";
+        $oauth->client_id     = $config['app_id'];
+        $oauth->client_secret = $config['app_secret'];
+        $oauth->scope         = $config['scope'];
+        $oauth->redirect_uri  = $config['callback_url'];
+        $oauth->Initialize();
+        $oauth->accessToken = $this->params()->fromQuery('access_token', false);
+
+        $response   = $oauth->curl_request("https://graph.connect.facebook.com/me/?", "GET", array(
+            'client_id'     => $oauth->client_id,
+            'client_secret' => $oauth->client_secret,
+            'oauth_token'   => $oauth->accessToken,
+        ));
+        $response   = json_decode($response);
+
+        $newspaper = new Newspaper();
+        $newspaper->setEmail($response->email);
+
         $form = new SignupForm($this->EmPlugin()->getEntityManager(), $request->getRequestUri());
-        $form->bind(new User());
+        $form->bind($newspaper);
 
         if ($request->isPost()) {
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
-                $user = $form->getData();
-                $user->setConfirmed(false);
-                $user->setPassword(sha1($user->getPassword()));
-
-                /** @var $userService UserService */
-                $userService = $this->getServiceLocator()->get('UserService');
-
-                // create registration link
-                $registrationToken = $userService->createRegistrationToken($user->getEmail());
-                $registrationLink = $request->getUri()->getScheme() . '://' . $request->getUri()->getHost() .
-                        $this->url()->fromRoute('user', array('encryptedemail' => $registrationToken, 'action' => 'confirm'));
-
-                // send the mail
-                $mailService = $this->getServiceLocator()->get('MailService');
-                $mailService->setVariables(array(
-                    'email' => $user->getEmail(),
-                    'registerLink' => $registrationLink,
-                ));
-                $mailService->setView('front/user/signup-mail.phtml');
-                $mailService->sendMail("Your account is ready to be activated!", $user->getEmail());
-
-                // save user
-                $this->EmPlugin()->getEntityManager()->persist($user);
+                $newspaper = $form->getData();
+                
+                // save newspaper
+                $this->EmPlugin()->getEntityManager()->persist($newspaper);
+                $this->EmPlugin()->getEntityManager()->flush();
+                
+                // save connector
+                $connector = new Connector();
+                $connector->setNewspaper($newspaper)
+                          ->setType(Connector::FEED_TYPE_FACEBOOK)
+                          ->setActive(true)
+                          ->setUniqueId($response->id);
+                
+                $this->EmPlugin()->getEntityManager()->persist($connector);
                 $this->EmPlugin()->getEntityManager()->flush();
 
-                $this->flashMessenger()->addSuccessMessage('Great! Check your inbox for a confirmation email to finish your signup.');
-                return $this->redirect()->toRoute('user', array('action' => 'login'));
+                $this->flashMessenger()->addSuccessMessage('Uw nieuwskrant werd aangemaakt.');
+                return $this->redirect()->toRoute('user/wildcard', 
+                    array(
+                        'action'     => 'invite',
+                        'newspaperId' => $newspaper->getId()
+                    ), array(), false
+                );
             }
         }
-
-        $this->layout()->title = "signup";
 
         return array(
             'form' => $form,
-            'actionFrom' => $this->params('actionFrom'),
         );
     }
-
-    public function confirmAction()
+    
+    public function inviteAction()
     {
-        if ($this->auth()->hasIdentity()) {
-            return $this->redirect()->toRoute('root', array());
+        $config  = $this->getServiceLocator()->get('config');
+        $config  = $config['connectors'];
+
+        $newspaperId = $this->params()->fromRoute('newspaperId', false);
+        $ids         = $this->params()->fromQuery('to', false);
+        $requestId   = $this->params()->fromQuery('request', false);
+
+        /* @var $tagRepo \Doctrine\ORM\EntityRepository */
+        $newspaperRepo = $this->EmPlugin()->getEntityManager()->getRepository('Common\Entity\Newspaper');
+        $newspaper     = $newspaperRepo->findOneById($newspaperId);
+
+        if (!$newspaper) {
+            $this->flashMessenger()->addErrorMessage('Oeps, er ging iets verkeerd.');
+            return $this->redirect()->toRoute('root');
         }
 
-        if (!$this->params('encryptedemail')) {
-            $this->flashMessenger()->addErrorMessage('Invalid confirmation token!');
-            return $this->redirect()->toRoute('root', array());
-        }
+        if ($requestId && $ids) {
+            foreach ($ids as $id) {
+                $connectorRepo = $this->EmPlugin()->getEntityManager()->getRepository('Common\Entity\Connector');
+                $connector     = $connectorRepo->findOneBy(array(
+                    'type'      => Connector::FEED_TYPE_FACEBOOK,
+                    'uniqueId'  => $id,
+                    'requestId' => $requestId,
+                    'newspaper' => $newspaper->getId(),
+                ));
 
-        /** @var $userService UserService */
-        $userService = $this->getServiceLocator()->get('UserService');
-        $email = $userService->getEmailFromRegistrationToken($this->params('encryptedemail'));
-
-        $user = $this->EmPlugin()
-                     ->getEntityManager()
-                     ->getRepository('Common\Entity\User')
-                     ->findOneBy(array('email' => $email));
-
-        if (is_null($user)) {
-            $this->flashMessenger()->addErrorMessage('Invalid confirmation token!');
-            return $this->redirect()->toRoute('root', array());
-        }
-
-        $user->setConfirmed(true);
-
-        $this->EmPlugin()->getEntityManager()->persist($user);
-        $this->EmPlugin()->getEntityManager()->flush();
-
-        $this->flashMessenger()->addSuccessMessage('Your registration is completed!');
-        return $this->redirect()->toRoute('user', array('action' => 'login'));
-    }
-
-    public function loginAction()
-    {
-        if ($this->auth()->hasIdentity()) {
-            return $this->redirect()->toRoute('root', array());
-        }
-
-        $request = $this->getRequest();
-
-        $form = new LoginForm($this->EmPlugin()->getEntityManager(), $request->getRequestUri());
-
-        if ($request->isPost()) {
-            $form->setData($request->getPost());
-
-            if ($form->isValid()) {
-                $user         = $form->getData();
-
-                $authService  = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-                $adapter      = $authService->getAdapter();
-
-                $adapter->setIdentityValue($user['email']);
-                $adapter->setCredentialValue($user['password']);
-                $authResult   = $authService->authenticate();
-
-                if ($authResult->isValid()) {
-                    $time     = 1209600;
-                    $identity = $authResult->getIdentity();
-
-                    $authService->getStorage()->write($identity);
-
-                    $sessionManager = new \Zend\Session\SessionManager();
-                    $sessionManager->rememberMe($time);
-                    
-                    return $this->redirect()->toRoute('connector', array('action' => 'index'));
-                } else {
-                    $this->flashMessenger()->addErrorMessage("Supplied credential is invalid.");
-                    return $this->redirect()->toRoute('user', array('action' => 'login'));
+                if (!$connector) {
+                    $connector = new Connector();
+                    $connector->setNewspaper($newspaper)
+                              ->setType(Connector::FEED_TYPE_FACEBOOK)
+                              ->setUniqueId($id)
+                              ->setRequestId($requestId)
+                              ->setActive(false);
+                    $this->EmPlugin()->getEntityManager()->persist($connector);
+                    $this->EmPlugin()->getEntityManager()->flush();
                 }
-            } else {
-                $this->flashMessenger()->addErrorMessage("Supplied credential is invalid.");
-                return $this->redirect()->toRoute('user', array('action' => 'login'));
             }
-        }
 
-        $this->layout()->title = "login";
+            $this->flashMessenger()->addSuccessMessage('Uw krantje werd aangemaakt.');
+            return $this->redirect()->toRoute('root');
+        }
 
         return array(
-            'form' => $form
+            'config'    => $config,
+            'newspaper' => $newspaper
         );
     }
-
-    public function logoutAction()
+    
+    public function confirmAction()
     {
-        $this->auth()->clearIdentity();
+        $config  = $this->getServiceLocator()->get('config');
+        $config  = $config['connectors']['facebook'];
 
-        $sessionManager = new \Zend\Session\SessionManager();
-        $sessionManager->forgetMe();
+            $oauth   = new \Common\Service\Connector\SocialApi();
 
-        return $this->redirect()->toRoute('root', array());
-    }
+            $oauth->provider      = "Facebook";
+            $oauth->client_id     = $config['app_id'];
+            $oauth->client_secret = $config['app_secret'];
+            $oauth->scope         = "email,publish_stream,status_update,friends_online_presence,user_birthday,user_location,user_work_history";
+            $oauth->redirect_uri  = "http://www.familienieuws.eu/confirm";
+            $oauth->code          = $this->params()->fromQuery('code');
+            $oauth->Initialize();
 
-    public function passwordforgottenAction()
-    {
-        $request= $this->getRequest();
+            $oauth->accessToken = $oauth->getAccessToken();
 
-        $form   = new PasswordForgottenForm($this->EmPlugin()->getEntityManager(), $request->getRequestUri());
-
-        if ($request->isPost()) {
-            $form->setData($request->getPost());
-
-            if ($form->isValid()) {
-                $data = $form->getData();
-
-                $user = $this->EmPlugin()
-                             ->getEntityManager()
-                             ->getRepository('Common\Entity\User')
-                             ->findOneByEmail($data['email']);
-
-                /** @var $userService UserService */
-                $userService = $this->getServiceLocator()->get('UserService');
-
-                // create reset link
-                $resetLink
-                    = $this->getRequest()->getUri()->getScheme() . '://' . $this->getRequest()->getUri()->getHost()
-                    . $this->url()->fromRoute(
-                        'user',
-                        array(
-                            'action'         => 'passwordreset',
-                            'encryptedemail' => $userService->createPasswordResetToken($user)
-                        )
-                    );
-
-                // send the mail
-                $mailService = $this->getServiceLocator()->get('MailService');
-                $mailService->setVariables(array('resetLink' => $resetLink));
-                $mailService->setView('front/user/passwordforgotten-mail.phtml');
-                $mailService->sendMail("Reset your password", $user->getEmail());
-
-                // Route to login screen
-                $this->flashMessenger()->addSuccessMessage('Great! Check your inbox for a  email to reset your password.');
-                return $this->redirect()->toRoute('user', array('action' => 'login'));
-            }
-        }
-
-        $this->layout()->title = "password forgotten";
-
-        return array('form' => $form);
-    }
-
-    public function passwordresetAction()
-    {
-        if ($this->auth()->hasIdentity()) {
-            return $this->redirect()->toRoute('root', array());
-        }
-
-        /** @var $userService UserService */
-        $userService = $this->getServiceLocator()->get('UserService');
-
-        // check security in url
-        $passwordRecoveryString = $this->params()->fromRoute('encryptedemail', 0);
-        $explode = explode('|', base64_decode($passwordRecoveryString));
-
-        // check if user exists in our database
-        $objectExists = new UserExists(array(
-            'entity_manager' => $this->EmPlugin()->getEntityManager(),
-            'messages'  => array(
-                UserExists::ERROR_NO_OBJECT_FOUND => "Email Address Not Found"
-            )
+        $response   = $oauth->curl_request("https://graph.connect.facebook.com/me/?", "GET", array(
+            'client_id'     => $oauth->client_id,
+            'client_secret' => $oauth->client_secret,
+            'oauth_token'   => $oauth->accessToken,
         ));
+        $response   = json_decode($response);
+        var_dump($response);die;
 
-        if (!$objectExists->isValid($explode[0])) {
-            return array('errors' => $objectExists->getMessages());
-        }
+        $requestIds = $this->params()->fromRoute('requestIds');
+        $requestIds = explode(",", $requestIds);
 
-        /** @var $user User */
-        $user = $this->EmPlugin()
-                     ->getEntityManager()
-                     ->getRepository('Common\Entity\User')
-                     ->findOneBy(array('email' => $explode[0]));
+        foreach($requestIds as $requestId) {
+            $oauth   = new \Common\Service\Connector\SocialApi();
 
-        // check if user matches with the token
-        $identicalValidator = new Identical($passwordRecoveryString);
-        $identicalValidator->setMessage('Email Address Not Found', Identical::NOT_SAME);
-        $identicalValidator->setMessage('Email Address Not Found', Identical::MISSING_TOKEN);
-        if (!$identicalValidator->isValid($userService->createPasswordResetToken($user))) {
-            return array('errors' => $identicalValidator->getMessages());
-        }
+            $oauth->provider      = "Facebook";
+            $oauth->client_id     = $config['app_id'];
+            $oauth->client_secret = $config['app_secret'];
+            $oauth->scope         = "email,publish_stream,status_update,friends_online_presence,user_birthday,user_location,user_work_history";
+            $oauth->redirect_uri  = $config['callback_url'];
+            $oauth->code          = 
+            $oauth->Initialize();
 
-        $request = $this->getRequest();
+            $response   = $oauth->curl_request("https://graph.facebook.com/me/apprequests", "GET", array(
+                'client_id'     => $oauth->client_id,
+                'client_secret' => $oauth->client_secret,
+                'oauth_token'   => $oauth->accessToken,
+            ));
+            var_dump($response);
+            $response   = json_decode($response);
+            die;
 
-        $form = new PasswordResetForm($this->EmPlugin()->getEntityManager(), $request->getRequestUri());
+            $connectorRepo = $this->EmPlugin()->getEntityManager()->getRepository('Common\Entity\Connector');
+            $connector     = $connectorRepo->findOneBy(array('requestId' => $requestId));
 
-        if ($request->isPost()) {
-            $form->setData($request->getPost());
-
-            if ($form->isValid()) {
-                $data = $form->getData();
-
-                $user->setPassword(sha1($data['password']));
-
-                $this->EmPlugin()->getEntityManager()->persist($user);
-                $this->EmPlugin()->getEntityManager()->flush();
-
-                $this->flashMessenger()->addSuccessMessage('Great! Your password has been reset.');
-                return $this->redirect()->toRoute('user', array('action' => 'login'));
+            if (is_null($connector)) {
+                $this->flashMessenger()->addErrorMessage('Oeps, aanvraag niet gevonden.');
+                return $this->redirect()->toRoute('root');
             }
+
+            $connector->setActive(true);
+            $this->EmPlugin()->getEntityManager()->flush();
         }
 
-        $this->layout()->title = "reset password";
-
-        return array('form' => $form);
+        return array(
+            'config' => $config
+        );
+        //$this->flashMessenger()->addSuccessMessage('Uw aanvraag werd succesvol afgerond.');
+        //return $this->redirect()->toRoute('root');
     }
 }

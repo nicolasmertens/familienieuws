@@ -1,9 +1,7 @@
 <?php
 namespace Common\Entity;
 
-use Common\Entity\User;
-
-use Doctrine\Common\Collections\ArrayCollection;
+use Common\Entity\Newspaper;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,15 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Connector
 {
-    const FEED_TYPE_TWITTER    = 'TWITTER';
     const FEED_TYPE_FACEBOOK   = 'FACEBOOK';
-    const FEED_TYPE_FOURSQUARE = 'FOURSQUARE';
     const FEED_TYPE_INSTAGRAM  = 'INSTAGRAM';
 
     private static $feedTypeString = array(
-        self::FEED_TYPE_TWITTER    => 'Twitter',
         self::FEED_TYPE_FACEBOOK   => 'Facebook',
-        self::FEED_TYPE_FOURSQUARE => 'Foursquare',
         self::FEED_TYPE_INSTAGRAM  => 'Instagram',
     );
 
@@ -35,29 +29,59 @@ class Connector
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false, columnDefinition="ENUM('TWITTER', 'FOURSQUARE', 'FACEBOOK', 'INSTAGRAM')", name="type")
+     * @ORM\Column(type="string", nullable=false, columnDefinition="ENUM('FACEBOOK', 'INSTAGRAM')", name="type")
      * @var string $type
      */
     protected $type;
 
     /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string
+     */
+    protected $requestId;
+
+    /**
      * @ORM\Column(type="string", length=100, nullable=false)
      * @var string
      */
-    protected $name;
+    protected $uniqueId;
 
     /**
-     * @ORM\Column(name="value", type="text", nullable=false)
-     * @var string $value
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string
      */
-    protected $value;
+    protected $accessToken;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Common\Entity\User", inversedBy="connectors", cascade={"persist"}, fetch="LAZY")
-     * @ORM\JoinColumn(nullable=false, name="user_id", referencedColumnName="id")
-     * @var User
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string
+     */
+    protected $firstname;
+    
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string
+     */
+    protected $lastname;
+    
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     * @var string
+     */
+    protected $email;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" = false}, nullable=false)
+     * @var boolean $active
+     */
+    protected $active = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Common\Entity\Newspaper", inversedBy="connectors", cascade={"persist"}, fetch="LAZY")
+     * @ORM\JoinColumn(nullable=false, name="newspaper_id", referencedColumnName="id")
+     * @var Newspaper
      **/
-    protected $user;
+    protected $newspaper;
 
     public function __construct()
     {
@@ -106,55 +130,145 @@ class Connector
     /**
      * @return string
      */
-    public function getName()
+    public function getRequestId()
     {
-        return $this->name;
+        return $this->requestId;
     }
 
     /**
-     * @param string $name
+     * @param string $requestId
      * @return Connector
      */
-    public function setName($name)
+    public function setRequestId($requestId)
     {
-        $this->name = $name;
+        $this->requestId = $requestId;
         return $this;
     }
 
     /**
      * @return string $value
      */
-    public function getValue()
+    public function getUniqueId()
     {
-        return $this->value;
+        return $this->uniqueId;
     }
 
     /**
-     * @param string $value
+     * @param string $uniqueid
      * @return Connector
      */
-    public function setValue($value)
+    public function setUniqueId($uniqueId)
     {
-        $this->value = $value;
+        $this->uniqueId = $uniqueId;
         return $this;
     }
 
     /**
-     * @return User
+     * @return string
      */
-    public function getUser()
+    public function getAccessToken()
     {
-        return $this->user;
+        return $this->accessToken;
     }
 
     /**
-     * @param \Common\Entity\User $user
+     * @param string $accessToken
      * @return Connector
      */
-    public function setUser(User $user = null)
+    public function setAccessToken($accessToken)
     {
-        $this->user = $user;
+        $this->accessToken = $accessToken;
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param string $firstname
+     * @return Connector
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     * @return Connector
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return Connector
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param boolean $active
+     * @return Connector
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+        return $this;
+    }
+
+    /**
+     * @return boolean $active
+     */
+    public function isActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @return Newspaper
+     */
+    public function getNewspaper()
+    {
+        return $this->newspaper;
+    }
+
+    /**
+     * @param \Common\Entity\Connector $connector
+     * @return Connector
+     */
+    public function setNewspaper(Newspaper $newspaper = null)
+    {
+        $this->newspaper = $newspaper;
+        return $this;
+    }
 }

@@ -94,58 +94,6 @@ class SignupInputFilter implements InputFilterAwareInterface
             )
         );
 
-        $this->inputFilter->add(
-            $factory->createInput(
-                array(
-                    'name'      => 'password',
-                    'required'  => true,
-                    'filter'    => array(
-                        array('name' => 'StripTags'),
-                        array('name' => 'StringTrim'),
-                    ),
-                    'validators' => array(
-                        array(
-                            'name'    => 'StringLength',
-                            'options' => array(
-                                'encoding' => 'UTF-8',
-                                'min'      => 8,
-                                'max'      => 100,
-                                'messages' => array(
-                                    \Zend\Validator\StringLength::INVALID   => "Your password should be at least 8 characters long",
-                                    \Zend\Validator\StringLength::TOO_LONG  => "Your password should be at least 8 characters long",
-                                    \Zend\Validator\StringLength::TOO_SHORT => "Your password should be at least 8 characters long",
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        );
-
-        $this->inputFilter->add(
-            $factory->createInput(
-                array(
-                    'name'      => 'rePassword',
-                    'required'  => true,
-                    'filters'    => array(
-                        array('name' => 'StripTags'),
-                        array('name' => 'StringTrim'),
-                    ),
-                    'validators' => array(
-                        array(
-                            'name'    => 'Identical',
-                            'options' => array(
-                                'token'    => 'password',
-                                'messages' => array(
-                                    \Zend\Validator\Identical::NOT_SAME => "Passwords don't match",
-                                )
-                            )
-                        )
-                    )
-                )
-            )
-        );
-
         return $this->inputFilter;
     }
 }

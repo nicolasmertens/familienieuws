@@ -88,8 +88,8 @@ class NoUserExists extends AbstractValidator
     public function isValid($value)
     {
         $match = $this->entityManager
-                      ->getRepository('Common\Entity\User')
-                      ->findOneByEmail($value, $this->brand);
+                      ->getRepository('Common\Entity\Newspaper')
+                      ->findOneBy(array('email' => $value));
 
         if (is_object($match)) {
             $this->error(self::ERROR_OBJECT_FOUND, $value);

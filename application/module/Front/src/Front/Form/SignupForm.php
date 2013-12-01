@@ -20,36 +20,90 @@ class SignupForm extends Form {
 
         $this->setAttribute('method', 'post')
                 ->setAttribute('action', $url)
-                ->setHydrator(new DoctrineObject($em, 'Common\Entity\User'))
+                ->setAttribute('style', 'width:170px;')
+                ->setHydrator(new DoctrineObject($em, 'Common\Entity\Newspaper'))
                 ->setInputFilter($filters->setEntityManager($em)->getInputFilter());
+
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Text',
+                'name' => 'name',
+                'options' => array(
+                    'label' => 'Naam grootouder(s): *',
+                ),
+                'attributes' => array(
+                    'maxlength' => 50,
+                    'size'      => 50,                    
+                )
+            )
+        );
+
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Text',
+                'name' => 'street',
+                'options' => array(
+                    'label' => 'Straat: *',
+                ),
+                'attributes' => array(
+                    'maxlength' => 50,
+                    'size'      => 50,                    
+                )
+            )
+        );
+
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Text',
+                'name' => 'number',
+                'options' => array(
+                    'label' => 'Huisnummer: *',
+                ),
+                'attributes' => array(
+                    'maxlength' => 50,
+                    'size'      => 50,                    
+                )
+            )
+        );
+        
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Text',
+                'name' => 'zipcode',
+                'options' => array(
+                    'label' => 'Postcode: *',
+                ),
+                'attributes' => array(
+                    'maxlength' => 50,
+                    'size'      => 50,                    
+                )
+            )
+        );
+
+        $this->add(
+            array(
+                'type' => 'Zend\Form\Element\Text',
+                'name' => 'city',
+                'options' => array(
+                    'label' => 'Gemeente: *',
+                ),
+                'attributes' => array(
+                    'maxlength' => 50,
+                    'size'      => 50,                    
+                )
+            )
+        );
 
         $this->add(
             array(
                 'name' => 'email',
                 'type' => 'Zend\Form\Element\Email',
-                'attributes' => array(
-                    'placeholder' => 'enter your email address',
+                'options' => array(
+                    'label' => 'Email: *',
                 ),
-            )
-        );
-
-        $this->add(
-            array(
-                'name' => 'password',
-                'type' => 'Zend\Form\Element\Password',
                 'attributes' => array(
-                    'maxlength'   => '100',
-                    'placeholder' => 'enter your password',
-                ),
-            )
-        );
-        $this->add(
-            array(
-                'name' => 'rePassword',
-                'type' => 'Zend\Form\Element\Password',
-                'attributes' => array(
-                    'maxlength'   => '100',
-                    'placeholder' => 're-enter your password',
+                    'maxlength'   => 50,
+                    'size'        => 50,
                 ),
             )
         );
@@ -59,7 +113,7 @@ class SignupForm extends Form {
                 'name' => 'submit',
                 'attributes' => array(
                     'type'        => 'submit',
-                    'value'       => 'sign up for free',
+                    'value'       => 'registreer',
                     'class'       => 'button prefix',
                 ),
             )

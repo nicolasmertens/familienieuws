@@ -13,11 +13,22 @@ class StaticController extends AbstractActionController {
 
     public function homeAction()
     {
-        return array();
+        $config    = $this->getServiceLocator()->get('config');
+        $config    = $config['connectors'];
+
+        $requestIds = $this->params()->fromQuery('request_ids');
+
+        if ($requestIds) {
+            return $this->redirect()->toUrl("https://www.facebook.com/dialog/oauth?client_id=" . $config['facebook']['app_id'] . "&scope=email,publish_stream,status_update,friends_online_presence,user_birthday,user_location,user_work_history&redirect_uri=http://www.familienieuws.eu/confirm");
+        }
+
+        return array(
+            'config' => $config,
+        );
     }
     
     public function pricingAction()
     {
-        
+        return array();
     }
 }
