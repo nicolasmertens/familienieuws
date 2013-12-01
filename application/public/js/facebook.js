@@ -38,7 +38,8 @@ var FBcustom = (function(window, document, $, undefined)
                 message : 'Nodig je familie uit...'
             }, function(response) {
                 if (response.to) {
-                    window.location = "/invite/newspaperId/" + settings.newspaper_id + "?" + $.param(response);
+                    window.location = "/feed/page";
+                    //window.location = "/invite/newspaperId/" + settings.newspaper_id + "?" + $.param(response);
                 } else {
                     console.log('User cancelled login or did not fully authorize.');
                 }

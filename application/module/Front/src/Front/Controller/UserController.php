@@ -23,8 +23,8 @@ class UserController extends AbstractActionController {
 
         $request   = $this->getRequest();
 
-        require_once './../application/lib/facebookwrapper.php';
-        require_once './../application/lib/fbphotofeed.php';
+        require_once './lib/facebookwrapper.php';
+        require_once './lib/fbphotofeed.php';
 
         $facebookWrapper = new \FacebookWrapper(array(
             'appId'      => $config['app_id'],
@@ -122,7 +122,7 @@ class UserController extends AbstractActionController {
             }
 
             $this->flashMessenger()->addSuccessMessage('Uw krantje werd aangemaakt.');
-            return $this->redirect()->toRoute('root');
+            //return $this->redirect()->toRoute('root');
         }
 
         return array(
@@ -132,7 +132,7 @@ class UserController extends AbstractActionController {
     }
     
     public function confirmAction()
-    {
+    {        
         $config    = $this->getServiceLocator()->get('config');
         $config    = $config['connectors']['facebook'];
 

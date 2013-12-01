@@ -16,8 +16,8 @@ class FeedController extends AbstractActionController {
         $config    = $this->getServiceLocator()->get('config');
         $config    = $config['connectors']['facebook'];
 
-        require_once './../application/lib/facebookwrapper.php';
-        require_once './../application/lib/fbphotofeed.php';
+        require_once './lib/facebookwrapper.php';
+        require_once './lib/fbphotofeed.php';
 
         $facebookWrapper = new \FacebookWrapper(array(
             'appId' => $config['app_id'],
@@ -49,8 +49,8 @@ class FeedController extends AbstractActionController {
         $config    = $this->getServiceLocator()->get('config');
         $config    = $config['connectors']['facebook'];
 
-        require_once './../application/lib/facebookwrapper.php';
-        require_once './../application/lib/fbphotofeed.php';
+        require_once './lib/facebookwrapper.php';
+        require_once './lib/fbphotofeed.php';
 
         $facebookWrapper = new \FacebookWrapper(array(
             'appId' => $config['app_id'],
