@@ -7,16 +7,17 @@ jQuery(document).ready(function() {
 // ------------------------ facebook class -----------------------------
 var FBcustom = (function(window, document, $, undefined)
 {
-    
+
     var FBcustom = {};
     
     FBcustom.init = function()
     {
         FB.init({
-            appId: settings.app_id,
-            status: true, // check login status
-            cookie: true, // enable cookies to allow the server to access the session
-            xfbml: true
+            appId   : settings.app_id,
+            status  : true, // check login status
+            cookie  : true, // enable cookies to allow the server to access the session
+            xfbml   : true,
+            frictionlessRequests : true
         });
         FBcustom.events();
         return false;
@@ -38,8 +39,7 @@ var FBcustom = (function(window, document, $, undefined)
                 message : 'Nodig je familie uit...'
             }, function(response) {
                 if (response.to) {
-                    window.location = "/feed/page";
-                    //window.location = "/invite/newspaperId/" + settings.newspaper_id + "?" + $.param(response);
+                    window.location = "/invite/newspaperId/" + settings.newspaper_id + "?" + $.param(response);
                 } else {
                     console.log('User cancelled login or did not fully authorize.');
                 }

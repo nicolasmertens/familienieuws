@@ -61,7 +61,7 @@ return array(
                 'options' => array(
                     'route'       => '/:action',
                     'constraints' => array(
-                        'action'     => 'signup|invite|confirm',
+                        'action'     => 'signup|invite|confirm|done|final',
                     ),
                     'defaults'    => array(
                         'controller' => 'Front\Controller\User',
@@ -74,18 +74,6 @@ return array(
                         'type' => 'Wildcard'
                     )
                 )
-            ),
-            'static'        => array(
-                'type'    => 'segment',
-                'options' => array(
-                    'route'       => '/:action',
-                    'constraints' => array(
-                        'action'     => 'pricing',
-                    ),
-                    'defaults'    => array(
-                        'controller' => 'Front\Controller\Static',
-                    ),
-                ),
             ),
             'feed'        => array(
                 'type'    => 'segment',

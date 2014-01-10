@@ -1,0 +1,26 @@
+<div class="one_half">
+    <h1>Proficiat! Je bent nu toegevoegd aan het krantje van <?php echo $this->newspaper->getName(); ?></h1>
+</div>
+<div class="one_half last">
+    <div class="counters-circle clearfix">
+        <script type='text/javascript'>
+            jQuery(document).ready(function() {
+                var opts = {
+                    lines: 12, // The number of lines to draw
+                    angle: 0.5, // The length of each line
+                    lineWidth: 0.05, // The line thickness
+                    colorStart: '#50cbf4', // Colors
+                    colorStop: '#50cbf4', // just experiment with them
+                    strokeColor: '#f6f6f6', // to see which ones work best for you
+                    generateGradient: false
+                };
+                var gauge_1 = new Donut(document.getElementById('counter-circle-1')).setOptions(opts); // create sexy gauge!
+                gauge_1.maxValue = 100; // set max gauge value
+                gauge_1.animationSpeed = 128; // set animation speed (32 is default value)
+                gauge_1.set(100); // set actual value
+            });
+        </script><div class="counter-circle-wrapper"><canvas width="220" height="220" class="counter-circle" id="counter-circle-1"></canvas><div class="counter-circle-content">100%</div></div>
+    </div>
+</div>
+<div class="clearboth"></div>
+<div class="fullwidth-box" style="background-color:#ffffff;background-image:url();background-repeat:no-repeat;background-position:top left;background-attachment:scroll;border-top:0px solid #f6f6f6;border-bottom:0px solid #f6f6f6;padding-top:0px;padding-bottom:0px;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;"><div class="avada-row"></div></div>

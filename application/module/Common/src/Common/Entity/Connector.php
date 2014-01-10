@@ -47,7 +47,7 @@ class Connector
     protected $uniqueId;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=400, nullable=true)
      * @var string
      */
     protected $accessToken;

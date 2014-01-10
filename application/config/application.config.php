@@ -25,7 +25,7 @@ return array(
         'config_glob_paths' => array(
             'config/autoload/global.php',
             'config/autoload/{*.}{global,local}.php',
-            //'config/autoload/local.php',
+            'config/autoload/local.php',
         ),
 
         // Whether or not to enable a configuration cache.

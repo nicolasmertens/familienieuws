@@ -12,9 +12,9 @@ return array(
                 'params'      => array(
                     'host'     => '127.0.0.1',
                     'port'     => '3306',
-                    'user'     => 'hackathon',
-                    'password' => 'familienieuws',
-                    'dbname'   => 'www.familienieuws.eu',
+                    'user'     => 'root',
+                    'password' => '',
+                    'dbname'   => 'idealabs_familienieuws',
                 ),
                 'doctrineTypeMappings' => array('enum' => 'string'),
             )

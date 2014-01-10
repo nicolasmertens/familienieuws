@@ -1,6 +1,4 @@
 <?php
-use FrontTest\Service\MailService\EmailList;
-
 /**
  * Global Configuration Override
  *
@@ -29,7 +27,8 @@ return array(
         'facebook' => array(
             'app_id'            => '249404298556640',
             'app_secret'        => 'f52086f4a132e0169f611e3351447dd4',
-            'callback_url'      => '//www.familienieuws.eu/signup',
+            'callback_url'      => '//familienieuws.eu/signup',
+            'callback_url_invite_confirm' => 'http://familienieuws.eu/confirm',
             'scope'             => 'email,user_photos',
         ),
     )

@@ -972,7 +972,16 @@ abstract class BaseFacebook
     }
 
     curl_setopt_array($ch, $opts);
+    
+//curl_setopt($ch, CURLOPT_VERBOSE, true);
+//$verbose = fopen('php://temp', 'rw+');
+//curl_setopt($ch, CURLOPT_STDERR, $verbose);
+
     $result = curl_exec($ch);
+
+//rewind($verbose);
+//$verboseLog = stream_get_contents($verbose);
+//echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
 
     $errno = curl_errno($ch);
     // CURLE_SSL_CACERT || CURLE_SSL_CACERT_BADFILE
@@ -981,7 +990,17 @@ abstract class BaseFacebook
                      'using bundled information');
       curl_setopt($ch, CURLOPT_CAINFO,
                   dirname(__FILE__) . DIRECTORY_SEPARATOR . 'fb_ca_chain_bundle.crt');
+      
+    
+//curl_setopt($ch, CURLOPT_VERBOSE, true);
+//$verbose = fopen('php://temp', 'rw+');
+//curl_setopt($ch, CURLOPT_STDERR, $verbose);
+
       $result = curl_exec($ch);
+      
+//rewind($verbose);
+//$verboseLog = stream_get_contents($verbose);
+//echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
     }
 
     // With dual stacked DNS responses, it's possible for a server to
@@ -998,7 +1017,16 @@ abstract class BaseFacebook
                            'Please disable or get native IPv6 on your server.');
             self::$CURL_OPTS[CURLOPT_IPRESOLVE] = CURL_IPRESOLVE_V4;
             curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+            
+//curl_setopt($ch, CURLOPT_VERBOSE, true);
+//$verbose = fopen('php://temp', 'rw+');
+//curl_setopt($ch, CURLOPT_STDERR, $verbose);
+
             $result = curl_exec($ch);
+
+//rewind($verbose);
+//$verboseLog = stream_get_contents($verbose);
+//echo "Verbose information:\n<pre>", htmlspecialchars($verboseLog), "</pre>\n";
           }
         }
     }

@@ -11,11 +11,9 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class UserController extends AbstractActionController {
 
-    public function __construct()
-    {
-        
-    }
-
+    /**
+     *  stap 1 na inloggen op facebook form invullen met gegevens
+     */
     public function signupAction()
     {
         $config    = $this->getServiceLocator()->get('config');
@@ -23,8 +21,8 @@ class UserController extends AbstractActionController {
 
         $request   = $this->getRequest();
 
-        require_once './lib/facebookwrapper.php';
-        require_once './lib/fbphotofeed.php';
+        require_once './../application/lib/facebookwrapper.php';
+        require_once './../application/lib/fbphotofeed.php';
 
         $facebookWrapper = new \FacebookWrapper(array(
             'appId'      => $config['app_id'],
@@ -33,6 +31,7 @@ class UserController extends AbstractActionController {
             'fileUpload' => false, // optional
             'allowSignedRequest' => false // optional, but should be set to false for non-canvas apps
         ));
+        $facebookWrapper->setAccessToken($this->params()->fromQuery('access_token'));
 
         $user        = $facebookWrapper->getUserData();
 
@@ -66,7 +65,6 @@ class UserController extends AbstractActionController {
                 $this->EmPlugin()->getEntityManager()->persist($connector);
                 $this->EmPlugin()->getEntityManager()->flush();
 
-                $this->flashMessenger()->addSuccessMessage('Uw nieuwskrant werd aangemaakt.');
                 return $this->redirect()->toRoute('user/wildcard', 
                     array(
                         'action'     => 'invite',
@@ -80,7 +78,10 @@ class UserController extends AbstractActionController {
             'form' => $form,
         );
     }
-    
+
+    /**
+     * stap 2: inviteer familieleden
+     */
     public function inviteAction()
     {
         $config  = $this->getServiceLocator()->get('config');
@@ -121,8 +122,11 @@ class UserController extends AbstractActionController {
                 }
             }
 
-            $this->flashMessenger()->addSuccessMessage('Uw krantje werd aangemaakt.');
-            //return $this->redirect()->toRoute('root');
+            return $this->redirect()->toRoute('user/wildcard', 
+                array(
+                    'action'     => 'done'
+                ), array(), false
+            );
         }
 
         return array(
@@ -131,49 +135,87 @@ class UserController extends AbstractActionController {
         );
     }
     
+    /**
+     * step 3: klaar met het aanmaken van het krantje en het inviteren van familieleden
+     */
+    public function doneAction()
+    {
+        
+    }
+    
+
+    /**
+     * familieleden die uitnodiging aanvaarden komen uiteindelijk hier terecht...
+     * 1. we kunnen via php de access token niet uit de url halen... daarom renderen we eerst de view waarin wat javascript staat
+     * 2. de javascript redirect terug naar confirm, in de url staat nu de access_token die we kunnen uitlezen
+     * 3. we gaan de access_token opslaan in de database
+     */
     public function confirmAction()
-    {        
+    {
         $config    = $this->getServiceLocator()->get('config');
         $config    = $config['connectors']['facebook'];
 
-        require_once './../application/lib/facebookwrapper.php';
-        require_once './../application/lib/fbphotofeed.php';
+        if ($this->params()->fromQuery('access_token')) {
+            $accessToken = $this->params()->fromQuery('access_token');
 
-        $facebookWrapper = new \FacebookWrapper(array(
-            'appId'      => $config['app_id'],
-            'secret'     => $config['app_secret'],
-            'cookie'     => true,
-            'fileUpload' => false, // optional
-            'allowSignedRequest' => false // optional, but should be set to false for non-canvas apps
-        ));
-        if ($this->params()->fromQuery('state')) {
-            var_dump($facebookWrapper->getAccessToken());
-            var_dump($facebookWrapper->getUserData());
-            var_dump('test');die;
-        }
-        if (!$this->params()->fromQuery('access_token')) {
-            $url = $facebookWrapper->getLoginStatusUrl(array('response_type' => 'token'));
-            header('Location: ' . $url);
-            exit;
-        }
-        $user        = $facebookWrapper->getUserData();
+            require_once './../application/lib/facebookwrapper.php';
+            require_once './../application/lib/fbphotofeed.php';
 
-        $connectorRepo = $this->EmPlugin()->getEntityManager()->getRepository('Common\Entity\Connector');
-        $connectors    = $connectorRepo->findBy(array(
-            'type'      => Connector::FEED_TYPE_FACEBOOK,
-            'uniqueId'  => $user['id']
-        ));
+            $facebookWrapper = new \FacebookWrapper(array(
+                'appId'      => $config['app_id'],
+                'secret'     => $config['app_secret'],
+                'cookie'     => true,
+                'fileUpload' => false, // optional
+                'allowSignedRequest' => false // optional, but should be set to false for non-canvas apps
+            ));
+
+            $facebookWrapper->setAccessToken($accessToken);
+            $user = $facebookWrapper->getUserData();
+
+            $connectorRepo = $this->EmPlugin()->getEntityManager()->getRepository('Common\Entity\Connector');
+            $connectors    = $connectorRepo->findBy(array(
+                'type'      => Connector::FEED_TYPE_FACEBOOK,
+                'uniqueId'  => $user['id']
+            ));
+
+            foreach($connectors as $connector) {
+                $facebookWrapper->deleteRequest($connector->getRequestId());
+
+                $connector->setActive(true)
+                          ->setUniqueId($user['id'])
+                          ->setEmail($user['email'])
+                          ->setFirstname($user['first_name'])
+                          ->setLastname($user['last_name'])
+                          ->setAccessToken($accessToken);
+                $this->EmPlugin()->getEntityManager()->flush();
+            }
+
+            return $this->redirect()->toRoute('user/wildcard', 
+                array(
+                    'action'     => 'final',
+                    'newspaperId'=> $connector->getNewspaper()->getId()
+                ), array(), false
+            );
+
+        } else {
+            return array(
+                'config'    => $config,
+            );
+        }
+    }
+    
+    /**
+     * familielid heeft toegang gegeven tot zijn gegevens, krijgt een bevestigingspagina te zien
+     */
+    public function finalAction()
+    {
+        $newspaperId = $this->params()->fromRoute('newspaperId');
         
-        foreach($connectors as $connector) {
-            $connector->setActive(true)
-                      ->setUniqueId($user['id'])
-                      ->setEmail($user['email'])
-                      ->setFirstname($user['first_name'])
-                      ->setLastname($user['last_name'])
-                      ->setAccessToken($accessToken);
-            $this->EmPlugin()->getEntityManager()->flush();
-        }
-
-        return $this->redirect()->toRoute('root');
+        $newspaperRepo = $this->EmPlugin()->getEntityManager()->getRepository('Common\Entity\Newspaper');
+        $newspaper     = $newspaperRepo->find($newspaperId);
+        
+        return array(
+            'newspaper' => $newspaper
+        );
     }
 }

@@ -16,9 +16,12 @@ class StaticController extends AbstractActionController {
         $config    = $this->getServiceLocator()->get('config');
         $config    = $config['connectors'];
 
-        $requestIds = $this->params()->fromQuery('request_ids');
-
-        if ($requestIds) {
+        /**
+         * geïnviteerde familieleden die op bevestigen klikken in facebook zenden een request_ids mee ... 
+         * deze gaan we dadelijk terugsturen naar facebook om een access_token op te vragen
+         * facebook stuurt ze onmiddellijk terug naar de invite_confirm url (http://onzesite/confirm)
+         */
+        if ($this->params()->fromQuery('request_ids')) {
             require_once './../application/lib/facebookwrapper.php';
             require_once './../application/lib/fbphotofeed.php';
 
@@ -30,7 +33,7 @@ class StaticController extends AbstractActionController {
                 'allowSignedRequest' => false // optional, but should be set to false for non-canvas apps
             ));
             $url = $facebookWrapper->getLoginUrl(array(
-                'redirect_uri' => "http://www.familienieuws.eu/confirm",
+                'redirect_uri' => $config['facebook']['callback_url_invite_confirm'],
                 'scope'        => $config['facebook']['scope'],
                 'response_type'=> 'token'
             ));
@@ -42,10 +45,5 @@ class StaticController extends AbstractActionController {
                 'config' => $config,
             );
         }
-    }
-    
-    public function pricingAction()
-    {
-        return array();
     }
 }
