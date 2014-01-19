@@ -51,6 +51,9 @@ class UserController extends AbstractActionController {
                 $this->EmPlugin()->getEntityManager()->persist($newspaper);
                 $this->EmPlugin()->getEntityManager()->flush();
 
+                // get extended access token
+                $facebookWrapper->setExtendedAccessToken();
+
                 // save connector
                 $connector = new Connector();
                 $connector->setNewspaper($newspaper)
@@ -60,7 +63,7 @@ class UserController extends AbstractActionController {
                           ->setEmail($user['email'])
                           ->setFirstname($user['first_name'])
                           ->setLastname($user['last_name'])
-                          ->setAccessToken($this->params()->fromQuery('access_token'));
+                          ->setAccessToken($facebookWrapper->getAccessToken());
 
                 $this->EmPlugin()->getEntityManager()->persist($connector);
                 $this->EmPlugin()->getEntityManager()->flush();
@@ -178,6 +181,9 @@ class UserController extends AbstractActionController {
                 'uniqueId'  => $user['id']
             ));
 
+            // get extended access token
+            $facebookWrapper->setExtendedAccessToken();
+
             foreach($connectors as $connector) {
                 $facebookWrapper->deleteRequest($connector->getRequestId());
 
@@ -186,7 +192,7 @@ class UserController extends AbstractActionController {
                           ->setEmail($user['email'])
                           ->setFirstname($user['first_name'])
                           ->setLastname($user['last_name'])
-                          ->setAccessToken($accessToken);
+                          ->setAccessToken($facebookWrapper->getAccessToken());
                 $this->EmPlugin()->getEntityManager()->flush();
             }
 
